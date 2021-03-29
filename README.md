@@ -2,7 +2,7 @@
 
 ---
 
-<p align="center"> This is more about structures and code separing, than MobX-express, using clean code pattern on back and on front business logic separed from ui
+<p align="center"> This is more about structures and code separing, than MobX-express, because here it is used clean code pattern on back. And on frontend business logic is being separed from ui side
     <br> 
 </p>
 

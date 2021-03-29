@@ -1,0 +1,38 @@
+{
+  "name": "pern-architecture",
+  "description": "<h3 align=\"center\">Clean Code</h3>",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexisPell/Clean-code-rest-model.git"
+  },
+  "keywords": [
+    "monorepo",
+    "boilerplate",
+    "react",
+    "express",
+    "sequelize",
+    "postgreSQL",
+    "MobX"
+  ],
+  "author": "Alexis Pell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexisPell/Clean-code-rest-model/issues"
+  },
+  "homepage": "https://github.com/AlexisPell/Clean-code-rest-model#readme",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "lerna run dev",
+    "server": "lerna run server",
+    "web": "lerna run web",
+    "new-version": "lerna version --conventional-commits --yes",
+    "diff": "lerna diff"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
