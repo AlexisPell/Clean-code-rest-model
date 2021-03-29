@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
-import { errorHandler } from './../../utils/errorHandler';
 
 import { NextFunction, Request, Response } from 'express';
 import { Model, ModelCtor } from 'sequelize/types';
 import { IUser } from './../../types/types';
 
+import { errorHandler } from './../../utils/errorHandler';
 import { generateJwt } from './../../useCases/user/generateJwt';
 
 export const buildRegisterUser = (

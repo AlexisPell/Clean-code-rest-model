@@ -50,35 +50,6 @@ const TypeBrand = sequelize.define('type_brand', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
 
-// // connections
-// User.hasOne(Basket);
-// Basket.belongsTo(User);
-
-// User.hasMany(Rating);
-// Rating.belongsTo(User);
-
-// Type.hasMany(Device);
-// Device.belongsTo(Type);
-
-// Brand.hasMany(Device);
-// Device.belongsTo(Brand);
-
-// Device.hasMany(Rating);
-// Rating.belongsTo(Device);
-
-// Device.hasMany(DeviceInfo);
-// DeviceInfo.belongsTo(Device);
-
-// // many-to-many of basket and device through basketDevice
-// Basket.hasMany(BasketDevice);
-// BasketDevice.belongsTo(Basket);
-// Device.hasMany(BasketDevice);
-// BasketDevice.belongsTo(Device);
-
-// // many-to-many of type and brand without one-many-many-one
-// Type.belongsToMany(Brand, { through: TypeBrand });
-// Brand.belongsToMany(Type, { through: TypeBrand });
-
 User.hasOne(Basket, { constraints: false });
 Basket.belongsTo(User, { constraints: false });
 
