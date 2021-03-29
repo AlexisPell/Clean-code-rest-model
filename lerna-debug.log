@@ -9,7 +9,7 @@
 0 silly argv }
 1 notice cli v4.0.0
 2 verbose rootPath /home/alexis/Desktop/node/pern-shop
-3 info current version 1.0.1
+3 info current version 1.0.2
 4 silly isAnythingCommitted
 5 verbose isAnythingCommitted 1
 6 silly getCurrentBranch
@@ -19,48 +19,74 @@
 10 silly isBehindUpstream main is behind origin/main by 0 commit(s) and ahead by 1
 11 silly hasTags
 12 verbose hasTags true
-13 silly git-describe.sync "v1.0.1-1-g78daa4d" => {"lastTagName":"v1.0.1","lastVersion":"v1.0.1","refCount":"1","sha":"78daa4d","isDirty":false}
+13 silly git-describe.sync "v1.0.1-3-g01877cb" => {"lastTagName":"v1.0.1","lastVersion":"v1.0.1","refCount":"3","sha":"01877cb","isDirty":false}
 14 info Looking for changed packages since v1.0.1
 15 silly checking diff packages/server
+16 silly found diff in packages/server/CHANGELOG.md
 16 silly found diff in packages/server/config.env
 16 silly found diff in packages/server/package.json
+16 silly found diff in packages/server/src/controllers/basketController/deleteDeviceFromBasket.ts
+16 silly found diff in packages/server/src/controllers/basketController/getBasketWithDevices.ts
+16 silly found diff in packages/server/src/controllers/basketController/index.ts
+16 silly found diff in packages/server/src/controllers/basketController/postAddDeviceToBasket.ts
 16 silly found diff in packages/server/src/controllers/deviceController/postCreateDevice.ts
+16 silly found diff in packages/server/src/controllers/index.ts
+16 silly found diff in packages/server/src/controllers/ratingController/getDeviceRate.ts
+16 silly found diff in packages/server/src/controllers/ratingController/index.ts
+16 silly found diff in packages/server/src/controllers/ratingController/postRateDevice.ts
 16 silly found diff in packages/server/src/controllers/userController/checkAuth.ts
 16 silly found diff in packages/server/src/controllers/userController/index.ts
 16 silly found diff in packages/server/src/controllers/userController/login.ts
 16 silly found diff in packages/server/src/controllers/userController/register.ts
+16 silly found diff in packages/server/src/models/models.ts
+16 silly found diff in packages/server/src/routes/basketRouter.ts
 16 silly found diff in packages/server/src/routes/brandRouter.ts
 16 silly found diff in packages/server/src/routes/deviceRouter.ts
+16 silly found diff in packages/server/src/routes/index.ts
+16 silly found diff in packages/server/src/routes/ratingRouter.ts
 16 silly found diff in packages/server/src/routes/typeRouter.ts
 16 silly found diff in packages/server/src/routes/userRouter.ts
-16 silly found diff in packages/server/src/types/express.ts
+16 silly found diff in packages/server/src/types/express.d.ts
 16 silly found diff in packages/server/src/types/types.ts
-16 silly found diff in packages/server/src/useCases/post/checkSameDevice.ts
+16 silly found diff in packages/server/src/useCases/device/checkSameDevice.ts
 16 silly found diff in packages/server/src/useCases/user/generateJwt.ts
 16 silly found diff in packages/server/src/utils/authMiddleware.ts
 16 silly found diff in packages/server/yarn.lock
 17 verbose filtered diff [
+17 verbose filtered diff   'packages/server/CHANGELOG.md',
 17 verbose filtered diff   'packages/server/config.env',
 17 verbose filtered diff   'packages/server/package.json',
+17 verbose filtered diff   'packages/server/src/controllers/basketController/deleteDeviceFromBasket.ts',
+17 verbose filtered diff   'packages/server/src/controllers/basketController/getBasketWithDevices.ts',
+17 verbose filtered diff   'packages/server/src/controllers/basketController/index.ts',
+17 verbose filtered diff   'packages/server/src/controllers/basketController/postAddDeviceToBasket.ts',
 17 verbose filtered diff   'packages/server/src/controllers/deviceController/postCreateDevice.ts',
+17 verbose filtered diff   'packages/server/src/controllers/index.ts',
+17 verbose filtered diff   'packages/server/src/controllers/ratingController/getDeviceRate.ts',
+17 verbose filtered diff   'packages/server/src/controllers/ratingController/index.ts',
+17 verbose filtered diff   'packages/server/src/controllers/ratingController/postRateDevice.ts',
 17 verbose filtered diff   'packages/server/src/controllers/userController/checkAuth.ts',
 17 verbose filtered diff   'packages/server/src/controllers/userController/index.ts',
 17 verbose filtered diff   'packages/server/src/controllers/userController/login.ts',
 17 verbose filtered diff   'packages/server/src/controllers/userController/register.ts',
+17 verbose filtered diff   'packages/server/src/models/models.ts',
+17 verbose filtered diff   'packages/server/src/routes/basketRouter.ts',
 17 verbose filtered diff   'packages/server/src/routes/brandRouter.ts',
 17 verbose filtered diff   'packages/server/src/routes/deviceRouter.ts',
+17 verbose filtered diff   'packages/server/src/routes/index.ts',
+17 verbose filtered diff   'packages/server/src/routes/ratingRouter.ts',
 17 verbose filtered diff   'packages/server/src/routes/typeRouter.ts',
 17 verbose filtered diff   'packages/server/src/routes/userRouter.ts',
-17 verbose filtered diff   'packages/server/src/types/express.ts',
+17 verbose filtered diff   'packages/server/src/types/express.d.ts',
 17 verbose filtered diff   'packages/server/src/types/types.ts',
-17 verbose filtered diff   'packages/server/src/useCases/post/checkSameDevice.ts',
+17 verbose filtered diff   'packages/server/src/useCases/device/checkSameDevice.ts',
 17 verbose filtered diff   'packages/server/src/useCases/user/generateJwt.ts',
 17 verbose filtered diff   'packages/server/src/utils/authMiddleware.ts',
 17 verbose filtered diff   'packages/server/yarn.lock'
 17 verbose filtered diff ]
 18 verbose updated pern-server
-19 verbose git-describe undefined => "v1.0.1-1-g78daa4d"
-20 silly git-describe parsed => {"lastTagName":"v1.0.1","lastVersion":"v1.0.1","refCount":"1","sha":"78daa4d","isDirty":false}
+19 verbose git-describe undefined => "v1.0.1-3-g01877cb"
+20 silly git-describe parsed => {"lastTagName":"v1.0.1","lastVersion":"v1.0.1","refCount":"3","sha":"01877cb","isDirty":false}
 21 silly fixed for pern-server at /home/alexis/Desktop/node/pern-shop/packages/server
 22 verbose getChangelogConfig using preset "conventional-changelog-angular"
 23 silly npa Result {
@@ -80,17 +106,17 @@
 23 silly npa }
 24 verbose getChangelogConfig Attempting to resolve preset "conventional-changelog-angular"
 25 info getChangelogConfig Successfully resolved preset "conventional-changelog-angular"
-26 verbose fixed increment 1.0.1 by patch
+26 verbose fixed increment 1.0.2 by patch
 27 info auto-confirmed
 28 info execute Skipping releases
 29 silly lifecycle No script for "preversion" in "pern-architecture", continuing
 30 silly lifecycle No script for "preversion" in "pern-server", continuing
 31 silly lifecycle No script for "version" in "pern-server", continuing
 32 silly fixed for pern-server at /home/alexis/Desktop/node/pern-shop/packages/server
-33 silly fixed writing new entry: "## [1.0.2](https://github.com/AlexisPell/Clean-code-rest-model/compare/v1.0.1...v1.0.2) (2021-03-29)\n\n**Note:** Version bump only for package pern-server\n\n\n\n"
+33 silly fixed writing new entry: "## [1.0.3](https://github.com/AlexisPell/Clean-code-rest-model/compare/v1.0.1...v1.0.3) (2021-03-29)\n\n**Note:** Version bump only for package pern-server\n\n\n\n"
 34 verbose fixed wrote /home/alexis/Desktop/node/pern-shop/packages/server/CHANGELOG.md
 35 silly root for pern-architecture at /home/alexis/Desktop/node/pern-shop
-36 silly root writing new entry: "## [1.0.2](https://github.com/AlexisPell/Clean-code-rest-model/compare/v1.0.1...v1.0.2) (2021-03-29)\n\n**Note:** Version bump only for package pern-architecture\n\n\n\n"
+36 silly root writing new entry: "## [1.0.3](https://github.com/AlexisPell/Clean-code-rest-model/compare/v1.0.1...v1.0.3) (2021-03-29)\n\n**Note:** Version bump only for package pern-architecture\n\n\n\n"
 37 verbose root wrote /home/alexis/Desktop/node/pern-shop/CHANGELOG.md
 38 silly lifecycle No script for "version" in "pern-architecture", continuing
 39 silly gitAdd [
