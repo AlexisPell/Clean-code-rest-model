@@ -26,9 +26,9 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "lerna run dev",
-    "server": "lerna run server",
-    "web": "lerna run web",
+    "dev": "npx lerna run --stream dev",
+    "server": "lerna run --stream server",
+    "web": "lerna run --stream web",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff"
   },

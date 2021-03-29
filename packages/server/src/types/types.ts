@@ -1,3 +1,4 @@
+import { Model } from 'sequelize';
 export interface IUser {
   id: number;
   email: string;

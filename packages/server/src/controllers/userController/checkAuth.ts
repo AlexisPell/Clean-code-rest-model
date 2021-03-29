@@ -1,12 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
-import { errorHandler } from './../../utils/errorHandler';
+import { NextFunction, Response, Request } from 'express';
+import { generateJwt } from './../../useCases/user/generateJwt';
 
 export const checkAuth = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.query;
+  const { id, email, role } = (req as any).user;
 
-  if (!id) {
-    return next(errorHandler(404, 'Didnt specify the user'));
-  }
+  const token = generateJwt(id, email, role);
 
-  res.json({ msg: id });
+  res.json({ token });
 };
