@@ -6,7 +6,7 @@ import { typeController } from './../controllers/index';
 
 const { getAllTypes, postCreateType, deleteType } = typeController;
 
-const router = Router();
+const router = Router() as any;
 
 router.get('/', getAllTypes);
 router.post('/', authorized('ADMIN'), postCreateType);

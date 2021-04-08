@@ -1,10 +1,9 @@
-import { Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
+import { IType } from './../../types/types';
+import { MyRequest } from './../../types/express';
+import { Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
 
-export const buildGetAllTypes = (Type: ModelCtor<Model<any, any>>) => async (
-  req: Request,
-  res: Response
-) => {
+export const buildGetAllTypes = (Type: ModelCtor<IType>) => async (_: MyRequest, res: Response) => {
   const types = await Type.findAll();
 
   res.json(types);

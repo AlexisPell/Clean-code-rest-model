@@ -1,11 +1,12 @@
+import { IDevice } from './../../types/types';
+import { ModelCtor } from 'sequelize/types';
 export async function checkSameDevice(
-  Device: any,
+  Device: ModelCtor<IDevice>,
   deviceName: string,
-  errorHandler: any,
-  next: any
+  errorHandler: (...args: any) => any,
+  next: (...args: any) => any
 ) {
   let devices = await Device.findAll();
-  console.log('🚀 ~ file: postCreateDevice.ts ~ line 37 ~ checkSameDevice ~ devices', devices);
   devices = devices.map((d: any) => ({ ...d.dataValues }));
 
   if (devices.some((d: any) => d.name === deviceName)) {

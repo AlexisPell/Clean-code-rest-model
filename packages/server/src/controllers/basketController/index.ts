@@ -2,7 +2,7 @@ import { buildGetBasketWithDevices } from './getBasketWithDevices';
 import { buildPostAddDeviceToBasket } from './postAddDeviceToBasket';
 import { buildDeleteDeviceFromBasket } from './deleteDeviceFromBasket';
 
-import { Basket, User, BasketDevice, Device } from './../../models/models';
+import { Basket, BasketDevice, Device } from './../../models/models';
 
 const getBasketByUser = buildGetBasketWithDevices(Basket, BasketDevice, Device);
 const postAddDeviceToBasket = buildPostAddDeviceToBasket(Basket, BasketDevice);

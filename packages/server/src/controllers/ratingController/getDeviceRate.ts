@@ -1,16 +1,22 @@
-import { errorHandler } from './../../utils/errorHandler';
-import { NextFunction, Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
-
 import _ from 'lodash';
+import { errorHandler } from './../../utils/errorHandler';
 
-export const buildGetDeviceRate = (Rating: ModelCtor<Model<any, any>>) => async (
-  req: Request,
+import { MyRequest } from './../../types/express';
+import { IRating } from './../../types/types';
+import { NextFunction, Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
+
+export const buildGetDeviceRate = (Rating: ModelCtor<IRating>) => async (
+  req: MyRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
     let { deviceId } = req.query;
+
+    if (!deviceId) {
+      return next(errorHandler(400, 'No deviceId provided'));
+    }
 
     const rating = await Rating.findAll({ where: { deviceId } });
 

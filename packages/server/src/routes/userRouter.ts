@@ -6,7 +6,7 @@ import { userController } from './../controllers/index';
 
 const { checkAuth, login, register } = userController;
 
-const router = Router();
+const router = Router() as any;
 
 router.post('/registration', register);
 router.post('/login', login);

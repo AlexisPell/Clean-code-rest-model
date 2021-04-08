@@ -1,17 +1,29 @@
 import { errorHandler } from './../../utils/errorHandler';
-import { NextFunction, Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
+
+import { IBasket, IBasketDevice } from './../../types/types';
+import { MyRequest } from './../../types/express';
+import { NextFunction, Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
 
 export const buildDeleteDeviceFromBasket = (
-  Basket: ModelCtor<Model<any, any>>,
-  BasketDevice: ModelCtor<Model<any, any>>
-) => async (req: Request, res: Response, next: NextFunction) => {
+  Basket: ModelCtor<IBasket>,
+  BasketDevice: ModelCtor<IBasketDevice>
+) => async (req: MyRequest, res: Response, next: NextFunction) => {
   try {
-    const userId = (req as any).user.id;
+    const { deviceId } = req.query;
+    const userId = req.user.id;
+
+    if (!deviceId) {
+      return next(errorHandler(400, 'No deviceId url query defined'));
+    }
+
     const basket = await Basket.findOne({ where: { userId } });
 
-    const { deviceId } = req.query;
-    await BasketDevice.destroy({ where: { basketId: (basket as any).id, deviceId } });
+    if (!basket) {
+      return next(errorHandler(400, 'No basket found'));
+    }
+
+    await BasketDevice.destroy({ where: { basketId: basket.id, deviceId } });
 
     res.json({ msg: 'successfully removed device from basket' });
   } catch (error) {

@@ -1,21 +1,31 @@
 import { errorHandler } from './../../utils/errorHandler';
-import { NextFunction, Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
+
+import { IBasketDevice, IBasket } from './../../types/types';
+import { MyRequest } from './../../types/express';
+import { NextFunction, Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
 
 export const buildPostAddDeviceToBasket = (
-  Basket: ModelCtor<Model<any, any>>,
-  BasketDevice: ModelCtor<Model<any, any>>
-) => async (req: Request, res: Response, next: NextFunction) => {
+  Basket: ModelCtor<IBasket>,
+  BasketDevice: ModelCtor<IBasketDevice>
+) => async (req: MyRequest, res: Response, next: NextFunction) => {
   try {
-    const basket = await Basket.findOne({ where: { userId: (req as any).user.id } });
+    const basket = await Basket.findOne({ where: { userId: req.user.id } });
     const { deviceId } = req.query;
 
+    if (!deviceId) {
+      return next(errorHandler(400, "No 'deviceId' url query defined"));
+    }
+    if (!basket) {
+      return next(errorHandler(400, 'No basket found'));
+    }
+
     const basketDevice = await BasketDevice.findOne({
-      where: { basketId: (basket as any).id, deviceId },
+      where: { basketId: basket.id, deviceId },
     });
 
     if (!basketDevice) {
-      await BasketDevice.create({ basketId: (basket as any).id, deviceId });
+      await BasketDevice.create({ basketId: basket.id, deviceId });
     }
 
     res.json({

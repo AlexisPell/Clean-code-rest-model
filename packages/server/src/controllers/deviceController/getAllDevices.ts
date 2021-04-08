@@ -1,8 +1,12 @@
-import { Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
+import { getAllDevices } from './../../useCases/device/getAllDevices';
 
-export const buildGetAllDevices = (Device: ModelCtor<Model<any, any>>) => async (
-  req: Request,
+import { MyRequest } from './../../types/express';
+import { IDevice } from './../../types/types';
+import { Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
+
+export const buildGetAllDevices = (Device: ModelCtor<IDevice>) => async (
+  req: MyRequest,
   res: Response
 ) => {
   let { brandId, typeId, limit, page }: any = req.query;
@@ -12,19 +16,7 @@ export const buildGetAllDevices = (Device: ModelCtor<Model<any, any>>) => async 
 
   let offset = page * limit - limit;
 
-  let devices: any[] = [];
-  if (!brandId && !typeId) {
-    devices = await Device.findAll({ limit, offset });
-  }
-  if (brandId && !typeId) {
-    devices = await Device.findAll({ where: { brandId }, limit, offset });
-  }
-  if (!brandId && typeId) {
-    devices = await Device.findAll({ where: { typeId }, limit, offset });
-  }
-  if (brandId && typeId) {
-    devices = await Device.findAll({ where: { brandId, typeId }, limit, offset });
-  }
+  const devices = await getAllDevices(Device, brandId, typeId, limit, offset);
 
   res.json(devices);
 };

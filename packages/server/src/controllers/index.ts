@@ -5,7 +5,7 @@ import { deviceController } from './deviceController/index';
 import { basketController } from './basketController/index';
 import { ratingController } from './ratingController/index';
 
-export default {
+const controllers = {
   userController,
   brandController,
   typeController,
@@ -13,6 +13,9 @@ export default {
   basketController,
   ratingController,
 };
+
+export default controllers;
+
 export {
   userController,
   brandController,

@@ -6,7 +6,7 @@ import { brandController } from './../controllers/index';
 
 const { getAllBrands, postCreateBrand, deleteBrand } = brandController;
 
-const router = Router();
+const router = Router() as any;
 
 router.get('/', getAllBrands);
 router.post('/', authorized('ADMIN'), postCreateBrand);

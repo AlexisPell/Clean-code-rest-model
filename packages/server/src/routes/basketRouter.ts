@@ -6,7 +6,7 @@ import { basketController } from './../controllers/index';
 
 const { getBasketByUser, postAddDeviceToBasket, deleteDeviceFromBasket } = basketController;
 
-const router = Router();
+const router = Router() as any;
 
 router.get('/', authorized('USER'), getBasketByUser);
 router.post('/', authorized('USER'), postAddDeviceToBasket);

@@ -1,58 +1,64 @@
 import { Model } from 'sequelize';
-export interface IUser {
+
+export interface IUser extends Model {
   id: number;
   email: string;
   password: string;
   role: string;
+  rateId: number;
 }
 
-export interface IBasket {
+export interface IBasket extends Model {
   id: number;
   userId: number;
   basketDeviceId: number;
 }
 
-// export interface BasketDevice {}
+export interface IBasketDevice extends Model {
+  id: number;
+  basketId: number;
+  deviceId: number;
+}
 
-export interface IDevice {
+export interface IDevice extends Model {
   id: number;
   name: string;
   price: number;
   rating: number;
   img: string;
-  // deviceInfoId: number // as "info"
+  info: number; // as "info" deviceInfoId
+  basketDeviceId: number;
 }
 
-export interface IDeviceInfo {
+export interface IDeviceInfo extends Model {
   id: number;
   title: string;
   description: string;
-  // deviceId: number // as "info"
-  info: number;
+  deviceId: number; // as "info"
 }
 
-export interface IType {
+export interface IType extends Model {
   id: number;
   name: string;
-  // brandId: number;
+  brandId: number;
   deviceId: number;
 }
 
-export interface IBrand {
+export interface IBrand extends Model {
   id: number;
   name: string;
-  // typeId: number;
+  typeId: number;
   deviceId: number;
 }
 
-export interface IRating {
+export interface IRating extends Model {
   id: number;
   rate: number;
   userId: number;
   deviceId: number;
 }
 
-export interface ITypeBrand {
+export interface ITypeBrand extends Model {
   id: number;
   typeId: number;
   brandId: number;

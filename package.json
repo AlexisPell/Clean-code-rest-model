@@ -10,6 +10,7 @@
     "monorepo",
     "boilerplate",
     "react",
+    "next",
     "express",
     "sequelize",
     "postgreSQL",
@@ -22,21 +23,21 @@
   },
   "homepage": "https://github.com/AlexisPell/Clean-code-rest-model#readme",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/**"
+    ]
+  },
   "scripts": {
-    "dev": "npx lerna run --stream dev",
-    "server": "lerna run --stream server",
-    "web": "lerna run --stream web",
+    "dev": "lerna run --stream dev",
+    "server": "lerna exec --scope @lerna/server",
+    "web": "lerna exec --scope @lerna/web -- yarn dev",
     "new-version": "lerna version --conventional-commits --yes",
+    "clean": "lerna clean",
+    "clean-and-strap": "npx lerna clean -y && npx lerna bootstrap",
     "diff": "lerna diff"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.168",
     "lerna": "^4.0.0"
-  },
-  "dependencies": {
-    "lodash": "^4.17.21"
   }
 }

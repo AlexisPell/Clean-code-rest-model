@@ -1,16 +1,18 @@
 import bcrypt from 'bcrypt';
 
-import { NextFunction, Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
-import { IUser } from './../../types/types';
-
 import { errorHandler } from './../../utils/errorHandler';
 import { generateJwt } from './../../useCases/user/generateJwt';
 
-export const buildRegisterUser = (
-  User: ModelCtor<Model<any, any>>,
-  Basket: ModelCtor<Model<any, any>>
-) => async (req: Request, res: Response, next: NextFunction) => {
+import { MyRequest } from './../../types/express';
+import { IUser, IBasket } from './../../types/types';
+import { NextFunction, Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
+
+export const buildRegisterUser = (User: ModelCtor<IUser>, Basket: ModelCtor<IBasket>) => async (
+  req: MyRequest,
+  res: Response,
+  next: NextFunction
+) => {
   const { email, password, role } = req.body;
 
   if (!email || !password) {
@@ -24,7 +26,7 @@ export const buildRegisterUser = (
 
   const hashPassword = await bcrypt.hash(password, 5);
 
-  const user: IUser & any = await User.create({ email, password: hashPassword, role });
+  const user = await User.create({ email, password: hashPassword, role });
 
   await Basket.create({ userId: user.id });
 

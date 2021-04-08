@@ -1,27 +1,28 @@
-import { IDevice, IDeviceInfo } from './../../types/types';
-import { v4 } from 'uuid';
+import { MyRequest } from './../../types/express';
 import path from 'path';
+import { v4 } from 'uuid';
 
 import { errorHandler } from './../../utils/errorHandler';
-import { NextFunction, Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
-
 import { checkSameDevice } from './../../useCases/device/checkSameDevice';
 
+import { IDevice, IDeviceInfo } from './../../types/types';
+import { NextFunction, Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
+
 export const buildPostCreateDevice = (
-  Device: ModelCtor<Model<any, any>>,
-  DeviceInfo: ModelCtor<Model<any, any>>
-) => async (req: Request, res: Response, next: NextFunction) => {
+  Device: ModelCtor<IDevice>,
+  DeviceInfo: ModelCtor<IDeviceInfo>
+) => async (req: MyRequest, res: Response, next: NextFunction) => {
   try {
     let { name, price, brandId, typeId, info } = req.body;
     const { img }: string | any = req.files;
 
     checkSameDevice(Device, name, errorHandler, next);
 
-    let fileName = `${v4()}.jpg`; //
+    let fileName = `${v4()}.jpg`;
     await img!.mv(path.resolve(__dirname, '..', '..', 'public', fileName));
 
-    const device: IDevice = await (Device as any).create({
+    const device: IDevice = await Device.create({
       name,
       price,
       brandId,

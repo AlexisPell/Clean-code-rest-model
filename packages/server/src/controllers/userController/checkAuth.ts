@@ -1,8 +1,10 @@
-import { NextFunction, Response, Request } from 'express';
 import { generateJwt } from './../../useCases/user/generateJwt';
 
-export const checkAuth = async (req: Request, res: Response, next: NextFunction) => {
-  const { id, email, role } = (req as any).user;
+import { MyRequest } from './../../types/express';
+import { Response } from 'express';
+
+export const checkAuth = async (req: MyRequest, res: Response) => {
+  const { id, email, role } = req.user;
 
   const token = generateJwt(id, email, role);
 

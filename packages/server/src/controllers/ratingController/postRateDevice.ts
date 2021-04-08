@@ -1,19 +1,25 @@
 import { errorHandler } from './../../utils/errorHandler';
-import { NextFunction, Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
 
-export const buildPostRateDevice = (Rating: ModelCtor<Model<any, any>>) => async (
-  req: Request,
+import { IRating } from './../../types/types';
+import { MyRequest } from './../../types/express';
+import { NextFunction, Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
+
+export const buildPostRateDevice = (Rating: ModelCtor<IRating>) => async (
+  req: MyRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = (req as any).user.id;
+    const userId = req.user.id;
     let { rate } = req.body;
     let { deviceId } = req.query;
 
     if (!rate) {
       return next(errorHandler(400, 'Rate was not provided'));
+    }
+    if (!deviceId) {
+      return next(errorHandler(400, 'deviceId url query was not provided'));
     }
 
     const rating = await Rating.findOne({ where: { userId, deviceId } });

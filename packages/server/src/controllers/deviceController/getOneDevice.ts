@@ -1,11 +1,14 @@
+import { MyRequest } from './../../types/express';
+import { IDevice, IDeviceInfo } from './../../types/types';
 import { errorHandler } from './../../utils/errorHandler';
-import { NextFunction, Request, Response } from 'express';
-import { Model, ModelCtor } from 'sequelize/types';
+
+import { NextFunction, Response } from 'express';
+import { ModelCtor } from 'sequelize/types';
 
 export const buildGetOneDevice = (
-  Device: ModelCtor<Model<any, any>>,
-  DeviceInfo: ModelCtor<Model<any, any>>
-) => async (req: Request, res: Response, next: NextFunction) => {
+  Device: ModelCtor<IDevice>,
+  DeviceInfo: ModelCtor<IDeviceInfo>
+) => async (req: MyRequest, res: Response, next: NextFunction) => {
   const device = await Device.findOne({
     where: { id: req.params.id },
     include: [{ model: DeviceInfo, as: 'info' }],
