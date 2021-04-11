@@ -1,0 +1,10 @@
+.animatedBg:hover {
+  transition: 0.3s ease-in all;
+  background-color: #000;
+  color: #fff;
+}
+
+.animatedColor:hover {
+  transition: 0.3s ease-in all;
+  color: #fff;
+}

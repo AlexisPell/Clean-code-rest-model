@@ -26,7 +26,7 @@ export interface IDevice {
   price: number;
   rating: number;
   img: string;
-  info: number; // as "info" deviceInfoId
+  info: number | IDeviceInfo | any[]; // as "info" deviceInfoId
   basketDeviceId: number;
 }
 

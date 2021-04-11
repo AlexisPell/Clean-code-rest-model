@@ -1,0 +1,14 @@
+.page-container {
+  margin: 0 auto;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: rgb(249, 181, 255);
+  overflow: auto;
+}
+
+.section-container {
+  margin: 0 auto;
+  max-width: 1400px;
+  width: 100%;
+  height: 100%;
+}

@@ -1,44 +1,36 @@
-import React from 'react';
+import { ShopOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { PageHeader, Button } from 'antd';
+import React from 'react';
+import IconsPanel from './icons.container';
+import styles from './navbar.module.scss';
 
-import { UnlockOutlined } from '@ant-design/icons';
-import Head from 'next/head';
+interface NavbarProps {}
 
-interface NavbarProps {
-  title: string;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ title }) => {
+const Navbar: React.FC<NavbarProps> = () => {
   const router = useRouter();
 
   return (
-    <div className='navbar'>
-      <div className='navbar__top'>
-        <strong style={{ fontSize: '26px' }}>
-          Smart Checkpoint <UnlockOutlined />
-        </strong>
-        <div>
-          <Link href='/about'>
-            <a onClick={() => router.push('/about')}>About</a>
-          </Link>
-        </div>
+    <section className={`${styles.container} section-container`}>
+      <div className={`${styles.logo} animatedBg`}>
+        <ShopOutlined />
+        <div>Online Consumer</div>
       </div>
-      <PageHeader
-        className='navbar__bottom'
-        title={title}
-        extra={[
-          <div className='navbar__buttons'>
-            <button key='3' onClick={() => router.push('/persons')}>
-              Persons Control
-            </button>
-            <button onClick={() => router.push('/access-points')}>Access Points</button>
-            <button onClick={() => router.push('/plans')}>Floor plans</button>
-          </div>,
-        ]}
-      />
-    </div>
+      <div className={`${styles.links}`}>
+        <Link href='/'>
+          <div className={`animatedBg`}>Shop</div>
+        </Link>
+        <Link href='/about'>
+          <div className={`animatedBg`}>About us</div>
+        </Link>
+        <Link href='/admin'>
+          <div className={`animatedBg`}>Admin panel</div>
+        </Link>
+      </div>
+      <div>
+        <IconsPanel />
+      </div>
+    </section>
   );
 };
 

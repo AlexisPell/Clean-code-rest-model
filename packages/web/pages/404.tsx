@@ -1,17 +1,10 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-const Error = () => {
-  const router = useRouter();
+import NotFound from 'src/pages/404/index';
 
-  return (
-    <div>
-      <h1>Oops... This page not found or it has never existed</h1>
-      <Link href='/'>
-        <a onClick={() => router.replace('/')}>Go to main page</a>
-      </Link>
-    </div>
-  );
+const Error = () => {
+  return <NotFound />;
 };
 
 export default Error;

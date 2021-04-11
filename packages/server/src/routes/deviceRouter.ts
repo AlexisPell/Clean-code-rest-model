@@ -10,7 +10,7 @@ const router = Router() as any;
 
 router.post('/', postCreateDevice);
 router.get('/', getAllDevices);
-router.get('/:id', authorized('ADMIN'), getOneDevice);
+router.get('/:id', authorized('USER'), getOneDevice);
 router.delete('/:id', authorized('ADMIN'), deleteDevice);
 
 export { router };

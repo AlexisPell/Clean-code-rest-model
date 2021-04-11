@@ -21,6 +21,7 @@ export const buildDeviceStore = () =>
 
 function deviceActions() {
   const setTypes = (types: IType[]) => {
+    console.log('🚀 ~ file: deviceStore.ts ~ line 24 ~ setTypes ~ types', types);
     deviceState._types = types;
   };
   const setBrands = (brands: IBrand[]) => {

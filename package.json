@@ -23,18 +23,16 @@
   },
   "homepage": "https://github.com/AlexisPell/Clean-code-rest-model#readme",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/**"
-    ]
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "lerna run --stream dev",
     "server": "lerna exec --scope @lerna/server",
     "web": "lerna exec --scope @lerna/web -- yarn dev",
     "new-version": "lerna version --conventional-commits --yes",
     "clean": "lerna clean",
-    "clean-and-strap": "npx lerna clean -y && npx lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "diff": "lerna diff"
   },
   "devDependencies": {
