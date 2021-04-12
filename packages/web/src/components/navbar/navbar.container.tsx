@@ -4,6 +4,13 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import IconsPanel from './icons.container';
 import styles from './navbar.module.scss';
+import { motion } from 'framer-motion';
+import {
+  appearFromLeftWithDelay,
+  appearFromRightWithDelay,
+  dropFromTop,
+  onHoverBGC,
+} from 'src/common/animationProps';
 
 interface NavbarProps {}
 
@@ -11,26 +18,28 @@ const Navbar: React.FC<NavbarProps> = () => {
   const router = useRouter();
 
   return (
-    <section className={`${styles.container} section-container`}>
-      <div className={`${styles.logo} animatedBg`}>
-        <ShopOutlined />
-        <div>Online Consumer</div>
-      </div>
+    <motion.section {...dropFromTop} className={`${styles.container}`}>
+      <motion.div {...appearFromLeftWithDelay}>
+        <motion.div {...onHoverBGC} className={`${styles.logo}`}>
+          <ShopOutlined />
+          <div>Online Consumer</div>
+        </motion.div>
+      </motion.div>
       <div className={`${styles.links}`}>
         <Link href='/'>
-          <div className={`animatedBg`}>Shop</div>
+          <motion.div {...onHoverBGC}>Shop</motion.div>
         </Link>
         <Link href='/about'>
-          <div className={`animatedBg`}>About us</div>
+          <motion.div {...onHoverBGC}>About us</motion.div>
         </Link>
         <Link href='/admin'>
-          <div className={`animatedBg`}>Admin panel</div>
+          <motion.div {...onHoverBGC}>Admin panel</motion.div>
         </Link>
       </div>
-      <div>
+      <motion.div {...appearFromRightWithDelay}>
         <IconsPanel />
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

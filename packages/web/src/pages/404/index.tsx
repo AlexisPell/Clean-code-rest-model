@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from './404.module.scss';
 
-import Navbar from 'src/components/navbar/index';
+import Navbar from 'src/components/navbar/navbar.container';
 
 interface NotFoundProps {}
 

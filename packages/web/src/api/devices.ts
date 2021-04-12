@@ -1,7 +1,7 @@
 import { IDevice } from 'src/typings/index';
 import axios, { AxiosResponse } from 'axios';
 
-export const getDevices = async () => {
+export const fetchDevices = async () => {
   try {
     const devices: AxiosResponse<IDevice[]> = await axios.get(
       `${process.env.BACKEND_URL}/api/device/`
@@ -9,6 +9,10 @@ export const getDevices = async () => {
     return devices.data;
   } catch (e) {
     console.log('Error fetching devices: ', e);
-    return [];
+    return null;
   }
 };
+
+// post /api/device/
+// delete /api/device/deviceId
+// get /api/device/deviceId

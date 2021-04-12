@@ -1,0 +1,12 @@
+.searchListContainer {
+  margin: 2rem 1rem;
+  width: 250px;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  word-wrap: break-word;
+  & > :nth-child(1) {
+    margin-right: 10px;
+  }
+}

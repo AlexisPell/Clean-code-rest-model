@@ -1,26 +1,29 @@
 import React from 'react';
 import Head from 'next/head';
+import styles from './shop.module.scss';
 
-import Navbar from 'src/components/navbar/index';
-import Shop from 'src/components/shop/index';
-import { IDevice } from 'src/typings';
+import { IBrand, IDevice, IType } from 'src/typings';
+
+import Navbar from 'src/components/navbar/navbar.container';
+import SearchList from 'src/components/searchList/searchList.container';
+import Shop from 'src/components/shop/shop.container';
 
 interface ShopPageSsrProps {
   title: string;
-  devices: IDevice[];
 }
 
-const ShopPage: React.FC<ShopPageSsrProps> = ({ title, devices }) => {
+const ShopPage: React.FC<ShopPageSsrProps> = ({ title }) => {
   return (
-    <>
+    <div className='page-container'>
       <Head>
         <title>{title}</title>
       </Head>
-      <div className='page-container'>
-        <Navbar />
-        <Shop devices={devices} />
-      </div>
-    </>
+      <Navbar />
+      <section className={`section-container ${styles['shop-container']}`}>
+        <SearchList />
+        <Shop />
+      </section>
+    </div>
   );
 };
 

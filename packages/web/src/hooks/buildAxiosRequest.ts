@@ -1,12 +1,6 @@
 import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
 import { useState, useEffect, useReducer } from 'react';
 
-// Example
-// // import { buildAxiosRequest } from "~/hooks/buildAxiosRequest";
-// export const axiosRequest = buildAxiosRequest<Item[]>({ url: "/api/item" });
-// // import { axiosRequest } from ""
-// const { data, loading, error, refetchData } = axiosRequest()
-
 interface IAxiosResponse<D> {
   data: D | null;
   loading: boolean;
