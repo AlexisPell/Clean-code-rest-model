@@ -14,9 +14,11 @@ interface ShopProps {}
 const Shop: React.FC<ShopProps> = observer(() => {
   const { deviceStore } = useStore();
 
-  console.log('device store', deviceStore);
   return (
     <section className={styles.shop}>
+      <div>
+        <h1>&#128512; Lorem, ipsum</h1>
+      </div>
       <div className={styles.shopGrid}>
         <List
           grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 3, xl: 3, xxl: 3 }}
