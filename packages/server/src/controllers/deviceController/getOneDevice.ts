@@ -18,5 +18,9 @@ export const buildGetOneDevice = (
     return next(errorHandler(400, 'No device found, sorry'));
   }
 
+  const deviceInfo = await DeviceInfo.findOne({ where: { deviceId: device.id } });
+
+  if (deviceInfo) device.info = deviceInfo;
+
   res.json(device);
 };

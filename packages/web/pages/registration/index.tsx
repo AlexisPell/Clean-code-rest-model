@@ -1,20 +1,11 @@
-// public
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
 
-interface RegistrationProps {
-  ssrString: string;
-}
+import AuthPage from 'src/pages/auth/authPage';
 
-const Registration: NextPage<RegistrationProps> = ({ ssrString }) => {
-  return <section>Registration section</section>;
+interface RegistrationProps {}
+
+const Registration: NextPage<RegistrationProps> = () => {
+  return <AuthPage title='Online Consumer | Registration' />;
 };
-
-export function getStaticProps() {
-  const ssrString = 'i m from server';
-  return { props: { ssrString } };
-}
 
 export default Registration;

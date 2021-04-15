@@ -8,9 +8,9 @@ const { getAllDevices, getOneDevice, postCreateDevice, deleteDevice } = deviceCo
 
 const router = Router() as any;
 
-router.post('/', postCreateDevice);
 router.get('/', getAllDevices);
-router.get('/:id', authorized('USER'), getOneDevice);
+router.get('/:id', getOneDevice);
+router.post('/', authorized('USER'), postCreateDevice);
 router.delete('/:id', authorized('ADMIN'), deleteDevice);
 
 export { router };

@@ -9,12 +9,21 @@ import { IDevice, IDeviceInfo } from './../../types/types';
 import { NextFunction, Response } from 'express';
 import { ModelCtor } from 'sequelize/types';
 
+interface IRequestBody {
+  name: string;
+  price: string;
+  brandId: number;
+  typeId: number;
+  img: any;
+  info: string;
+}
+
 export const buildPostCreateDevice = (
   Device: ModelCtor<IDevice>,
   DeviceInfo: ModelCtor<IDeviceInfo>
 ) => async (req: MyRequest, res: Response, next: NextFunction) => {
   try {
-    let { name, price, brandId, typeId, info } = req.body;
+    let { name, price, brandId, typeId, info }: IRequestBody = req.body;
     const { img }: string | any = req.files;
 
     checkSameDevice(Device, name, errorHandler, next);
@@ -31,8 +40,10 @@ export const buildPostCreateDevice = (
     });
 
     if (info) {
-      info = JSON.parse(info);
-      info.forEach((i: IDeviceInfo) => {
+      let parsedInfo = JSON.parse(info);
+      console.log('🚀 ~ file: postCreateDevice.ts ~ line 44 ~ )=> ~ parsedInfo', parsedInfo);
+      // sync creating without await
+      parsedInfo.forEach((i: IDeviceInfo) => {
         DeviceInfo.create({
           title: i.title,
           description: i.description,

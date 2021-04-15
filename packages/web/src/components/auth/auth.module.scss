@@ -1,0 +1,22 @@
+.auth {
+  margin: 4rem auto;
+  width: 50%;
+  & > * {
+    margin-bottom: 1rem;
+    font-size: 18px;
+    border-radius: 4px;
+  }
+}
+.button {
+  position: absolute;
+  padding: 0.5rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+}
+.link {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}

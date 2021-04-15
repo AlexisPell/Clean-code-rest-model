@@ -3,14 +3,16 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import Navbar from 'src/components/navbar/navbar.container';
-import AdminPanel from 'src/components/admin/admin.container';
+import Authorization from 'src/components/auth/auth.container';
 
-interface AdminPageSsrProps {
+interface AuthPageSsrProps {
   title: string;
 }
 
-const AdminPage: React.FC<AdminPageSsrProps> = ({ title }) => {
+const AuthPage: React.FC<AuthPageSsrProps> = ({ title }) => {
   const router = useRouter();
+
+  const isRegistering = router.route === '/registration';
 
   return (
     <div className='page-container'>
@@ -18,9 +20,9 @@ const AdminPage: React.FC<AdminPageSsrProps> = ({ title }) => {
         <title>{title}</title>
       </Head>
       <Navbar />
-      <AdminPanel />
+      <Authorization isRegistering={isRegistering} />
     </div>
   );
 };
 
-export default AdminPage;
+export default AuthPage;

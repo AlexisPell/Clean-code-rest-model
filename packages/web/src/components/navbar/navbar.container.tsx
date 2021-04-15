@@ -11,11 +11,14 @@ import {
   dropFromTop,
   onHoverBGC,
 } from 'src/common/animationProps';
+import { useStore } from 'src/mobx/index';
 
 interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
   const router = useRouter();
+  const { userStore } = useStore();
+  let { isAuthorized, user, setIsAuth, setUser } = userStore;
 
   return (
     <motion.section {...dropFromTop} className={`${styles.container}`}>

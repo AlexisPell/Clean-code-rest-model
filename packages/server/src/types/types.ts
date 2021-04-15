@@ -26,7 +26,7 @@ export interface IDevice extends Model {
   price: number;
   rating: number;
   img: string;
-  info: number; // as "info" deviceInfoId
+  info: IDeviceInfo; // as "info" deviceInfoId
   basketDeviceId: number;
 }
 

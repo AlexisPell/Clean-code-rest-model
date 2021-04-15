@@ -1,15 +1,27 @@
-// private
+import AdminPage from 'src/pages/admin/index';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
 
-interface AdminProps {
-  ssrString: string;
+import { useStore } from 'src/mobx';
+import { IBrand, IDevice, IType } from 'src/typings';
+
+// import { fetchDevices } from 'src/api/devices';
+// import { fetchTypes } from 'src/api/types';
+// import { fetchBrands } from 'src/api/brands';
+
+interface SsrProps {
+  devices: IDevice[];
+  brands: IBrand[];
+  types: IType[];
 }
 
-const Admin: NextPage<AdminProps> = ({ ssrString }) => {
-  return <section>admin section</section>;
+const Admin: NextPage<SsrProps> = ({ devices, brands, types }) => {
+  const { deviceStore } = useStore();
+
+  // deviceStore.setDevices(devices);
+  // deviceStore.setTypes(types);
+  // deviceStore.setBrands(brands);
+
+  return <AdminPage title='Online Consumer | Shop page' />;
 };
 
 export function getStaticProps() {

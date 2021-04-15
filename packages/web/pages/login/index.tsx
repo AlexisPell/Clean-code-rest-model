@@ -1,20 +1,11 @@
-// public
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
 
-interface LoginProps {
-  ssrString: string;
-}
+import AuthPage from 'src/pages/auth/authPage';
 
-const Login: NextPage<LoginProps> = ({ ssrString }) => {
-  return <section>Login section</section>;
+interface LoginProps {}
+
+const Login: NextPage<LoginProps> = () => {
+  return <AuthPage title='Online Consumer | Loggin in' />;
 };
-
-export function getStaticProps() {
-  const ssrString = 'i m from server';
-  return { props: { ssrString } };
-}
 
 export default Login;
