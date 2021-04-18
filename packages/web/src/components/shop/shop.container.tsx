@@ -1,79 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './shop.module.scss';
-import { motion } from 'framer-motion';
+import { motion, useCycle, useAnimation } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/mobx/index';
-import { Card, List } from 'antd';
 
-const { Meta } = Card;
-
-import { IDevice } from 'src/typings';
+import { header } from './shop.utils';
+import DeviceInfo from 'src/components/device/device.container';
 
 interface ShopProps {}
 
 const Shop: React.FC<ShopProps> = observer(() => {
-  const { deviceStore } = useStore();
+  const {
+    deviceStore: { devices, brand, type },
+  } = useStore();
+  const [chosenDevice, setChosenDevice] = useState<null | number>(null);
+
+  const listAnimations = useAnimation();
+  const deviceAnimations = useAnimation();
+  const hideToLeft = { x: '-100vw', opacity: 0, transition: { ease: 'easeIn' } };
+  const showFromRight = { x: '0', opacity: 1, transition: { ease: 'easeOut' } };
+
+  const openDeviceInfo = (deviceId: number) => {
+    listAnimations.start(hideToLeft);
+    setChosenDevice(deviceId);
+  };
 
   return (
     <section className={styles.shop}>
-      <div>
-        <h1>&#128512; Lorem, ipsum</h1>
-      </div>
-      <div className={styles.shopGrid}>
-        <List
-          grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 3, xl: 3, xxl: 3 }}
-          dataSource={deviceStore.devices}
-          renderItem={(d) => (
-            <>
-              <List.Item>
-                <Card
-                  className={styles.device}
-                  hoverable
-                  style={{ width: '240px', margin: 'auto' }}
-                  cover={
-                    <img
-                      alt='example'
-                      src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'
-                    />
-                  }
-                >
-                  title: {d.name} description: {d.info}
-                </Card>
-              </List.Item>
-              <List.Item>
-                <Card
-                  className={styles.device}
-                  hoverable
-                  style={{ width: '240px', margin: 'auto' }}
-                  cover={
-                    <img
-                      alt='example'
-                      src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'
-                    />
-                  }
-                >
-                  title: {d.name} description: {d.info}
-                </Card>
-              </List.Item>
-              <List.Item>
-                <Card
-                  className={styles.device}
-                  hoverable
-                  style={{ width: '240px', margin: 'auto' }}
-                  cover={
-                    <img
-                      alt='example'
-                      src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'
-                    />
-                  }
-                >
-                  title: {d.name} description: {d.info}
-                </Card>
-              </List.Item>
-            </>
-          )}
-        />
-      </div>
+      <div>{header(brand, type)}</div>
+      <motion.div animate={listAnimations} className={styles.devicesList}>
+        {devices.map((device) => (
+          <div className={styles.device} onClick={() => openDeviceInfo(device.id)}>
+            <div className={styles.deviceImg}>
+              <img src={`${process.env.BACKEND_URL}/${device.img}`} alt='device photo' />
+            </div>
+            <div className={styles.deviceInfo}>Device info: {device.name}</div>
+          </div>
+        ))}
+      </motion.div>
+      {chosenDevice && <DeviceInfo deviceId={chosenDevice} />}
     </section>
   );
 });

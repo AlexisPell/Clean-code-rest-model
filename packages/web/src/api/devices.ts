@@ -13,6 +13,17 @@ export const fetchDevices = async () => {
   }
 };
 
+export const fetchDevice = async (deviceId: number): Promise<IDevice | null> => {
+  try {
+    const device: AxiosResponse<IDevice> = await axios.get(
+      `${process.env.BACKEND_URL}/api/device/${deviceId}`
+    );
+    return device.data;
+  } catch (e) {
+    console.log('Error fetching devices: ', e);
+    return null;
+  }
+};
+
 // post /api/device/
 // delete /api/device/deviceId
-// get /api/device/deviceId
