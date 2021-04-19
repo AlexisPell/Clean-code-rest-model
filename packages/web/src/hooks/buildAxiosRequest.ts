@@ -1,8 +1,8 @@
-import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
+import axios, { AxiosStatic, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useState, useEffect, useReducer } from 'react';
 
 interface IAxiosResponse<D> {
-  data: D | null;
+  res: AxiosResponse<D> | null;
   loading: boolean;
   error: boolean;
   refetchData: () => void;
@@ -12,16 +12,16 @@ interface IAxiosResponse<D> {
  * HOC buildAxiosRequest
  * @author Alexis Pell
  * @param axiosParams Axios config object
- * @returns returns useHook function, which result is object with data, loading and error params
+ * @returns returns useHook function, which result is object with res, loading and error params
  */
 export const buildAxiosRequest = <D>(axiosConfig: AxiosRequestConfig) => {
   /**
    * useFetch hook
    * @author Alexis Pell
-   * @returns { data, loading, error }
+   * @returns { res, loading, error }
    */
   const hookResult = (): IAxiosResponse<D> => {
-    const [data, setData] = useState(null);
+    const [res, setRes] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [tick, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -31,21 +31,29 @@ export const buildAxiosRequest = <D>(axiosConfig: AxiosRequestConfig) => {
     const fetchData = async () => {
       try {
         setLoading(true);
+        console.log(
+          '🚀 ~ file: buildAxiosRequest.ts ~ line 36 ~ fetchData ~ axiosConfig',
+          axiosConfig
+        );
 
         const axiosResponse = await axios(axiosConfig);
-        console.log('axiosResponse result', axiosResponse);
+        console.log(
+          '🚀 ~ file: buildAxiosRequest.ts ~ line 36 ~ fetchData ~ axiosResponse',
+          axiosResponse
+        );
 
-        setData(axiosResponse);
+        setRes(axiosResponse);
       } catch (e) {
         console.warn('useAxiosRequest results failed with error:', e);
-        setData(null);
+        setRes({ data: 'error' });
+        setRes(null);
         setError({ error: e });
       } finally {
         setLoading(false);
       }
     };
 
-    // case for the first time fetching data
+    // case for the first time fetching res
     useEffect(() => {
       fetchData();
     }, []);
@@ -55,7 +63,7 @@ export const buildAxiosRequest = <D>(axiosConfig: AxiosRequestConfig) => {
     }, [tick, forceUpdate]);
 
     return {
-      data,
+      res,
       loading,
       error,
       refetchData,

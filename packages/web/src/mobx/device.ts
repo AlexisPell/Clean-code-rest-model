@@ -29,8 +29,9 @@ export class DeviceStore {
   setTypes = (types: IType[]) => {
     this._types = types;
   };
-  setDevice = (deviceId: IDevice['id']) => {
-    this._device = _(this.devices).find((d) => d.id === deviceId);
+  setFullDevice = (device) => {
+    console.log('🚀 ~ file: device.ts ~ line 33 ~ DeviceStore ~ device', device);
+    this._device = device;
   };
   setBrand = (brandId: IBrand['id']) => {
     this._brand = _(this.brands).find((b) => b.id === brandId);
@@ -38,20 +39,6 @@ export class DeviceStore {
   setType = (typeId: IType['id']) => {
     this._type = _(this.types).find((t) => t.id === typeId);
   };
-
-  // async
-  loadDevice = (deviceId: number) =>
-    flow(function* (this: DeviceStore) {
-      this._loading = true;
-      try {
-        const device = yield fetchDevice(deviceId);
-        this._device = device;
-      } catch (e) {
-        console.log('Error setting device to mobx: ', e);
-      } finally {
-        this._loading = false;
-      }
-    });
 
   // getters
   get loading() {

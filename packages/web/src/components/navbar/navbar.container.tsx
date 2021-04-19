@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           <motion.div {...onHoverBGC}>Shop</motion.div>
         </Link>
         <Link href='/about'>
-          <motion.div {...onHoverBGC}>About us</motion.div>
+          <motion.div {...onHoverBGC}>About product</motion.div>
         </Link>
         <Link href='/admin'>
           <motion.div {...onHoverBGC}>Admin panel</motion.div>

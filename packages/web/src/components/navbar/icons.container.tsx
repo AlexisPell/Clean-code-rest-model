@@ -18,47 +18,47 @@ const Icons: React.FC<IconsProps> = () => {
   if (!isAuthorized)
     icons = (
       <>
-        <Tooltip title='Go to my stuff'>
-          <Link href='/basket'>
+        <Link href='/basket'>
+          <Tooltip title='Go to my stuff'>
             <motion.div {...onHoverWhiteColor}>
               <ShoppingOutlined />
             </motion.div>
-          </Link>
-        </Tooltip>
-        <Tooltip title='Log in'>
-          <Link href='/login'>
+          </Tooltip>
+        </Link>
+        <Link href='/login'>
+          <Tooltip title='Log in'>
             <motion.div {...onHoverWhiteColor}>
               <LoginOutlined />
             </motion.div>
-          </Link>
-        </Tooltip>
+          </Tooltip>
+        </Link>
       </>
     );
 
   if (isAuthorized)
     icons = (
       <>
-        <Tooltip title='Go to my stuff'>
-          <Link href='/basket'>
+        <Link href='/basket'>
+          <Tooltip title='Go to my stuff'>
             <motion.div {...onHoverWhiteColor}>
               <ShoppingOutlined />
             </motion.div>
-          </Link>
-        </Tooltip>
-        <Tooltip title='My profile'>
-          <Link href='/'>
+          </Tooltip>
+        </Link>
+        <Link href='/'>
+          <Tooltip title='My profile'>
             <motion.div {...onHoverWhiteColor}>
               <UserOutlined />
             </motion.div>
-          </Link>
-        </Tooltip>
-        <Tooltip title='Log out'>
-          <Link href='/'>
+          </Tooltip>
+        </Link>
+        <Link href='/'>
+          <Tooltip title='Log out'>
             <motion.div {...onHoverWhiteColor}>
               <LogoutOutlined />
             </motion.div>
-          </Link>
-        </Tooltip>
+          </Tooltip>
+        </Link>
       </>
     );
 

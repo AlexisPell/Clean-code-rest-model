@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './shop.module.scss';
-import { motion, useCycle, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/mobx/index';
 
@@ -16,12 +16,16 @@ const Shop: React.FC<ShopProps> = observer(() => {
   const [chosenDevice, setChosenDevice] = useState<null | number>(null);
 
   const listAnimations = useAnimation();
-  const deviceAnimations = useAnimation();
   const hideToLeft = { x: '-100vw', opacity: 0, transition: { ease: 'easeIn' } };
-  const showFromRight = { x: '0', opacity: 1, transition: { ease: 'easeOut' } };
+  const showFromLeft = { x: '0', opacity: 1, transition: { ease: 'easeOut', delay: 0.15 } };
 
   const openDeviceInfo = (deviceId: number) => {
     listAnimations.start(hideToLeft);
+    setChosenDevice(deviceId);
+  };
+
+  const closeDeviceInfo = (deviceId: number) => {
+    listAnimations.start(showFromLeft);
     setChosenDevice(deviceId);
   };
 
@@ -30,15 +34,17 @@ const Shop: React.FC<ShopProps> = observer(() => {
       <div>{header(brand, type)}</div>
       <motion.div animate={listAnimations} className={styles.devicesList}>
         {devices.map((device) => (
-          <div className={styles.device} onClick={() => openDeviceInfo(device.id)}>
+          <div key={device.id} className={styles.device} onClick={() => openDeviceInfo(device.id)}>
             <div className={styles.deviceImg}>
-              <img src={`${process.env.BACKEND_URL}/${device.img}`} alt='device photo' />
+              <img src={`${process.env.BACKEND}/${device.img}`} alt='device photo' />
             </div>
             <div className={styles.deviceInfo}>Device info: {device.name}</div>
           </div>
         ))}
       </motion.div>
-      {chosenDevice && <DeviceInfo deviceId={chosenDevice} />}
+      <AnimatePresence>
+        {chosenDevice && <DeviceInfo deviceId={chosenDevice} setDeviceId={closeDeviceInfo} />}
+      </AnimatePresence>
     </section>
   );
 });
