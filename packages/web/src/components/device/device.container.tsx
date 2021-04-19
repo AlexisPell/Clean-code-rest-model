@@ -31,15 +31,16 @@ const hideToRight = { x: '100vw', opacity: 0, transition: { ease: 'easeIn' } };
 interface DeviceProps {
   deviceId: number;
   setDeviceId: (deviceId: number) => any;
+  style?: Record<string, any>;
 }
 
-const Device: React.FC<DeviceProps> = observer(({ deviceId, setDeviceId }) => {
+const Device: React.FC<DeviceProps> = observer(({ deviceId, setDeviceId, style }) => {
   const { device } = loadDevice(deviceId);
 
   const backToDevicesList = () => setDeviceId(null);
 
   return (
-    <div className={styles.deviceSection}>
+    <div className={styles.deviceSection} style={style}>
       <motion.div
         initial={initialAnimationState}
         animate={showFromRight}

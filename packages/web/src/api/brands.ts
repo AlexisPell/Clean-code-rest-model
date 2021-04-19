@@ -3,9 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 
 export const fetchBrands = async () => {
   try {
-    const brands: AxiosResponse<IBrand[]> = await axios.get(
-      `${process.env.BACKEND_URL}/api/device/`
-    );
+    const brands: AxiosResponse<IBrand[]> = await axios.get(`${process.env.BACKEND}/api/device/`);
     return brands.data;
   } catch (e) {
     console.log('Error fetching brands: ', e);

@@ -4,5 +4,6 @@ module.exports = {
   },
   env: {
     BACKEND: 'http://localhost:4000',
+    FRONTEND: 'http://localhost:3000',
   },
 };

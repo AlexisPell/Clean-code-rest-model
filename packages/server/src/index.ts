@@ -30,6 +30,11 @@ const main = async () => {
   // routes
   app.use('/api', router);
 
+  // documentation
+  app.get('/api/documentation', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'documentation.html'));
+  });
+
   // handlers
   app.use(notFound);
   app.use(commonErrorHandler);
