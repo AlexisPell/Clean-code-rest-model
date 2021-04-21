@@ -4,7 +4,7 @@ export interface IUser {
   id: number;
   email: string;
   password: string;
-  role: string;
+  role: 'USER' | 'ADMIN';
   rateId: number;
 }
 

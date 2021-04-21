@@ -1,7 +1,7 @@
 import { ShopOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import IconsPanel from './icons.container';
 import styles from './navbar.module.scss';
 import { motion } from 'framer-motion';
@@ -10,15 +10,18 @@ import {
   appearFromRightWithDelay,
   dropFromTop,
   onHoverBGC,
-} from 'src/common/animationProps';
+} from 'src/styles/animationProps';
 import { useStore } from 'src/mobx/index';
+import { observer } from 'mobx-react-lite';
 
 interface NavbarProps {}
 
-const Navbar: React.FC<NavbarProps> = () => {
-  const router = useRouter();
+const Navbar: React.FC<NavbarProps> = observer(() => {
   const { userStore } = useStore();
-  let { isAuthorized, user, setIsAuth, setUser } = userStore;
+
+  useEffect(() => {
+    userStore.checkUserToken();
+  }, []);
 
   return (
     <motion.section {...dropFromTop} className={`${styles.container}`}>
@@ -35,15 +38,17 @@ const Navbar: React.FC<NavbarProps> = () => {
         <Link href='/about'>
           <motion.div {...onHoverBGC}>About product</motion.div>
         </Link>
-        <Link href='/admin'>
-          <motion.div {...onHoverBGC}>Admin panel</motion.div>
-        </Link>
+        {userStore.user?.role === 'ADMIN' && (
+          <Link href='/admin'>
+            <motion.div {...onHoverBGC}>Admin panel</motion.div>
+          </Link>
+        )}
       </div>
       <motion.div {...appearFromRightWithDelay}>
         <IconsPanel />
       </motion.div>
     </motion.section>
   );
-};
+});
 
 export default Navbar;

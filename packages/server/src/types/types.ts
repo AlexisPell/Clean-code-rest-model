@@ -4,7 +4,7 @@ export interface IUser extends Model {
   id: number;
   email: string;
   password: string;
-  role: string;
+  role: 'USER' | 'ADMIN';
   rateId: number;
 }
 

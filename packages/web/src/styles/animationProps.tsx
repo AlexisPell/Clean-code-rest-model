@@ -1,3 +1,16 @@
+export const appAnimations = {
+  pageInitial: {
+    opacity: 0,
+  },
+  pageAnimate: {
+    opacity: 1,
+  },
+  pageExit: {
+    backgroundColor: 'white',
+    opacity: 0,
+  },
+};
+
 export const dropFromTop = {
   animate: { y: 0 },
   initial: { y: '-100vh' },

@@ -7,7 +7,7 @@ interface SearchListProps {}
 
 const SearchList: React.FC<SearchListProps> = () => {
   const {
-    deviceStore: { brands, types, setBrand, setType },
+    deviceStore: { brands, types, findBrand, findType },
   } = useStore();
 
   // local logic
@@ -18,10 +18,10 @@ const SearchList: React.FC<SearchListProps> = () => {
   const filter = setFilter(
     currentBrand,
     setCurrentBrand,
-    setBrand,
+    findBrand,
     currentType,
     setCurrentType,
-    setType
+    findType
   );
 
   return (

@@ -19,25 +19,42 @@ export class DeviceStore {
     makeAutoObservable(this);
   }
 
-  // actions
+  // // actions // //
+  // Devices
   setDevices = (devices: IDevice[]) => {
     this._devices = devices;
   };
+  setFullDevice = (device: IDevice) => {
+    this._device = device;
+  };
+  removeDevice = (deviceId: IDevice['id']) => {
+    this._devices = this._devices.filter((d) => d.id !== deviceId);
+  };
+  // Brands
   setBrands = (brands: IBrand[]) => {
     this._brands = brands;
   };
+  findBrand = (brandId: IBrand['id']) => {
+    this._brand = _(this.brands).find((b) => b.id === brandId);
+  };
+  addBrand = (brand: IBrand) => {
+    this._brands = [...this._brands, brand];
+  };
+  removeBrand = (brandId: IBrand['id']) => {
+    this._brands = this._brands.filter((b) => b.id !== brandId);
+  };
+  // Types
   setTypes = (types: IType[]) => {
     this._types = types;
   };
-  setFullDevice = (device) => {
-    console.log('🚀 ~ file: device.ts ~ line 33 ~ DeviceStore ~ device', device);
-    this._device = device;
-  };
-  setBrand = (brandId: IBrand['id']) => {
-    this._brand = _(this.brands).find((b) => b.id === brandId);
-  };
-  setType = (typeId: IType['id']) => {
+  findType = (typeId: IType['id']) => {
     this._type = _(this.types).find((t) => t.id === typeId);
+  };
+  addType = (type: IType) => {
+    this._types = [...this._types, type];
+  };
+  removeType = (typeId: IType['id']) => {
+    this._types = this._types.filter((t) => t.id !== typeId);
   };
 
   // getters

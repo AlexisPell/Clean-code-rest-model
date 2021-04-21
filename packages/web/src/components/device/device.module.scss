@@ -20,6 +20,11 @@
   font-size: 26px;
   border-radius: 10px;
 }
+.imgWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .deviceInfo {
   width: 100%;
   height: 100%;
@@ -29,4 +34,19 @@
   }
   padding: 0.5rem 1rem;
   overflow: hidden;
+}
+.deviceDescription {
+  padding: 1rem 0rem;
+  overflow-y: auto;
+}
+.description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+  padding-bottom: 0.5rem;
+  & > * {
+    display: flex;
+    align-items: center;
+  }
 }

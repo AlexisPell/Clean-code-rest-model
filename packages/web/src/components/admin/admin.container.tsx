@@ -1,106 +1,44 @@
 import React, { useState } from 'react';
 import styles from './admin.module.scss';
-import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/mobx/index';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import DeviceForm from './deviceForm.component';
+import DeviceForm from './deviceForm.container';
 import { Tooltip } from 'antd';
-// import { itemsList } from './itemsList.container';
+import AddModal from './addModal.container';
+import { checkIfAdmin } from 'src/hooks/checkIfAdmin';
+import { deleteBrand } from 'src/api/brands';
+import { IBrand, IType } from '../../../../server/src/types/types';
+import { IDevice } from 'src/typings';
+import ItemsList from './itemsList.container';
 
 interface AuthProps {}
 
 const AdminPanel: React.FC<AuthProps> = observer(({}) => {
+  checkIfAdmin();
+
   const {
     deviceStore: { devices, brands, types },
   } = useStore();
 
   const [deviceId, setDeviceId] = useState<null | number>(null);
-
-  const itemsList = (brands, types, devices) => (
-    <div className={styles.lists}>
-      <div className={styles.list}>
-        <h3>
-          Categories{' '}
-          <Tooltip title='Add a new category' placement='right'>
-            <a>
-              <PlusCircleOutlined />
-            </a>
-          </Tooltip>
-        </h3>
-        {types.map((type) => (
-          <div
-            key={type.id}
-            className={`${styles.listItem}`}
-            // onClick={() => filter('type', type.id)}
-          >
-            <div>{type.name}</div>
-            <Tooltip title='Delete category' placement='right'>
-              <a style={{ marginLeft: 'auto' }}>
-                <DeleteOutlined />
-              </a>
-            </Tooltip>
-          </div>
-        ))}
-      </div>
-      <div className={styles.list}>
-        <h3>
-          Brands{' '}
-          <Tooltip title='Add a new brand' placement='right'>
-            <a>
-              <PlusCircleOutlined />
-            </a>
-          </Tooltip>
-        </h3>
-        {brands.map((brand) => (
-          <div
-            key={brand.id}
-            className={`${styles.listItem}`}
-            // onClick={() => filter('brand', brand.id)}
-          >
-            <div>{brand.name}</div>
-            <Tooltip title='Delete brand' placement='right'>
-              <a style={{ marginLeft: 'auto' }}>
-                <DeleteOutlined />
-              </a>
-            </Tooltip>
-          </div>
-        ))}
-      </div>
-      <div className={styles.list}>
-        <h3>
-          Devices{' '}
-          <Tooltip title='Add a new device' placement='right'>
-            <a>
-              <PlusCircleOutlined />
-            </a>
-          </Tooltip>
-        </h3>
-        {devices.map((device) => (
-          <div
-            key={device.id}
-            className={`${styles.listItem}`}
-            onClick={() => {
-              setDeviceId(device.id);
-            }}
-          >
-            <div>{device.name}</div>
-            <Tooltip title='Delete device' placement='right'>
-              <a style={{ marginLeft: 'auto' }}>
-                <DeleteOutlined />
-              </a>
-            </Tooltip>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState<'type' | 'brand'>('type');
 
   return (
     <section className={`section-container ${styles.adminSection}`}>
-      {brands && types && devices && itemsList(brands, types, devices)}
+      {brands && types && devices && (
+        <ItemsList
+          deviceId={deviceId}
+          setDeviceId={setDeviceId}
+          setModalType={setModalType}
+          setModalVisible={setModalVisible}
+        />
+      )}
       <DeviceForm deviceId={deviceId} setDeviceId={setDeviceId} />
+      {modalVisible && (
+        <AddModal visible={modalVisible} setVisible={setModalVisible} modalType={modalType} />
+      )}
     </section>
   );
 });

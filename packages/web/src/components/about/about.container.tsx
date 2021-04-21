@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './about.module.scss';
 import { motion } from 'framer-motion';
 import { sectionInfo } from './about.info';
-import { appearFromLeft, appearFromRight } from 'src/common/animationProps';
+import { appearFromLeft, appearFromRight } from 'src/styles/animationProps';
 
 interface AboutSectionProps {}
 

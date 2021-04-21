@@ -13,7 +13,7 @@ interface DeviceFormProps {
   setDeviceId?: (...any) => void;
 }
 
-// if takes deviceId - shows it info, else - show form to create device
+// if takes deviceId - shows it info, else - shows form to create new device
 const DeviceForm: React.FC<DeviceFormProps> = ({ deviceId, setDeviceId }) => {
   const form = (
     <motion.div

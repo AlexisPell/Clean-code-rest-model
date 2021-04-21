@@ -1,4 +1,5 @@
 import { Input, Form, message } from 'antd';
+import { MessageApi } from 'antd/lib/message';
 import Link from 'next/link';
 import { ChangeEvent, MutableRefObject, useRef, useState } from 'react';
 import styles from './auth.module.scss';
@@ -131,7 +132,7 @@ export const RenderLink = ({ isLoggining }: { isLoggining: boolean }) => {
   );
 };
 
-export const validateData = (form: Partial<IFormState>, isLoggining: boolean) => {
+export const validateData = (form: Partial<IFormState>, isLoggining: boolean): IFormState | any => {
   if (!form) {
     return message.warning('Form may not be blank');
   }

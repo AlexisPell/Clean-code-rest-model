@@ -7,16 +7,16 @@ import { useStore } from 'src/mobx/index';
 import { header } from './shop.utils';
 import DeviceInfo from 'src/components/device/device.container';
 
-const listAnimations = useAnimation();
-const hideToLeft = { x: '-100vw', opacity: 0, transition: { ease: 'easeIn' } };
-const showFromLeft = { x: '0', opacity: 1, transition: { ease: 'easeOut', delay: 0.15 } };
-
 interface ShopProps {}
 
 const Shop: React.FC<ShopProps> = observer(() => {
   const {
     deviceStore: { devices, brand, type },
   } = useStore();
+
+  const listAnimations = useAnimation();
+  const hideToLeft = { x: '-100vw', opacity: 0, transition: { ease: 'easeIn' } };
+  const showFromLeft = { x: '0', opacity: 1, transition: { ease: 'easeOut', delay: 0.15 } };
 
   const [chosenDevice, setChosenDevice] = useState<null | number>(null);
 
