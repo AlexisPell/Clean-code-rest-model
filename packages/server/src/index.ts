@@ -41,10 +41,17 @@ const main = async () => {
 
   const PORT = process.env.PORT || 4000;
 
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(
       `Server is running in ${process.env.NODE_ENV} on ${process.env.BACKEND_URL}/`.blue.bold
     );
+  });
+
+  // Handle unhandled promise rejections
+  process.on('unhandledRejection', (err, promise) => {
+    console.log(`Error: ${(err as any).message}`);
+    // Close server and exit process
+    server.close(() => process.exit(1));
   });
 };
 

@@ -9,11 +9,11 @@ export const buildDeleteDevice = (Device: ModelCtor<IDevice>) => async (
   req: MyRequest,
   res: Response
 ) => {
-  const device = await Device.findOne({ where: { id: req.params.id } });
+  const device = await Device.findOne({ where: { id: req.body.id } });
 
   if (device) {
     fs.unlink(path.resolve(__dirname, '..', '..', 'public', device?.img), () => {});
-    await Device.destroy({ where: { id: req.params.id } });
+    await Device.destroy({ where: { id: req.body.id } });
   }
 
   res.json({ deleted: true });

@@ -13,7 +13,7 @@ interface IconsProps {}
 
 const Icons: React.FC<IconsProps> = observer(() => {
   const {
-    userStore: { isAuthorized, logout },
+    userStore: { isAuthorized, logout, user },
   } = useStore();
 
   let icons;
@@ -32,6 +32,7 @@ const Icons: React.FC<IconsProps> = observer(() => {
   if (isAuthorized)
     icons = (
       <>
+        <div>{user.email}</div>
         <Link href='/basket'>
           <Tooltip title='Go to my stuff'>
             <motion.div {...onHoverWhiteColor}>

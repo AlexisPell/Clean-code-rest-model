@@ -47,6 +47,3 @@ export const deleteBrand = async (brandId: number): Promise<{ deleted: boolean }
     return { deleted: false };
   }
 };
-
-// post /api/brand/
-// delete /api/brand/

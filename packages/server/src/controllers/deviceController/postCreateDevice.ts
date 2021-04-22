@@ -25,6 +25,7 @@ export const buildPostCreateDevice = (
   try {
     let { name, price, brandId, typeId, info }: IRequestBody = req.body;
     const { img }: string | any = req.files;
+    console.log('🚀 ~ file: postCreateDevice.ts ~ line 28 ~ )=> ~ img', img);
 
     checkSameDevice(Device, name, errorHandler, next);
 

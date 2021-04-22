@@ -45,6 +45,3 @@ export const deleteType = async (typeId: number): Promise<{ deleted: boolean }> 
     return { deleted: false };
   }
 };
-
-// post /api/type/
-// delete /api/type/

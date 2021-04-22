@@ -2,19 +2,14 @@ import React, { useState } from 'react';
 import styles from './admin.module.scss';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/mobx/index';
-import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import DeviceForm from './deviceForm.container';
-import { Tooltip } from 'antd';
 import AddModal from './addModal.container';
 import { checkIfAdmin } from 'src/hooks/checkIfAdmin';
-import { deleteBrand } from 'src/api/brands';
-import { IBrand, IType } from '../../../../server/src/types/types';
-import { IDevice } from 'src/typings';
 import ItemsList from './itemsList.container';
 
 interface AuthProps {}
 
-const AdminPanel: React.FC<AuthProps> = observer(({}) => {
+const AdminPanel: React.FC<AuthProps> = observer(() => {
   checkIfAdmin();
 
   const {

@@ -8,9 +8,9 @@ import { fetchDevice } from 'src/api/devices';
 export class DeviceStore {
   // state
   _loading: boolean = false;
-  _devices: Partial<IDevice>[] = null;
-  _brands: Partial<IBrand>[] = null;
-  _types: Partial<IType>[] = null;
+  _devices: Partial<IDevice>[] = [];
+  _brands: Partial<IBrand>[] = [];
+  _types: Partial<IType>[] = [];
   _device: Partial<IDevice> = null;
   _brand: Partial<IBrand> = null;
   _type: Partial<IType> = null;
