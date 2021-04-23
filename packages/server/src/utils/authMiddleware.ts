@@ -22,7 +22,7 @@ export const authorized = (role?: IRole) => (req: MyRequest, res: Response, next
     }
 
     const decoded = jwt.verify(token, (process as any).env.SECRET_KEY);
-    if ((decoded as IUser).role !== role && (decoded as IUser).role !== 'ADMIN') {
+    if ((decoded as IUser).role !== role || (decoded as IUser).role !== 'ADMIN') {
       return res.status(401).json(routeInfo('No access to this route'));
     }
 

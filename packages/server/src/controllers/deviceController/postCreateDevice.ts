@@ -24,6 +24,8 @@ export const buildPostCreateDevice = (
 ) => async (req: MyRequest, res: Response, next: NextFunction) => {
   try {
     let { name, price, brandId, typeId, info }: IRequestBody = req.body;
+    console.log('🚀 ~ file: postCreateDevice.ts ~ line 27 ~ )=> ~ req.files', req.files);
+    console.log('🚀 ~ file: postCreateDevice.ts ~ line 27 ~ )=> ~ req.body', req.body);
     const { img }: string | any = req.files;
     console.log('🚀 ~ file: postCreateDevice.ts ~ line 28 ~ )=> ~ img', img);
 

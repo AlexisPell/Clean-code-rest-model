@@ -3,108 +3,129 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-}
-
-.lists {
-  display: flex;
-  flex-direction: column;
-  margin: 0.5rem 0;
-  width: 250px;
-  height: calc(100vh - 80px);
-  overflow-y: auto;
-  padding-bottom: 1rem;
-}
-
-.list {
-  margin: 0.5rem;
-  & > :nth-child(1) {
-    background-color: #f2f3f5;
-    font-size: 18px;
-    padding: 0.5rem 1rem;
-    overflow-y: hidden;
-    margin-bottom: 0;
-  }
-  .listItemHeader {
-    border-radius: 0.5rem;
-  }
-  background-color: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 20%);
-}
-
-.listItem {
-  padding: 0.25rem 0.5rem;
-  overflow-y: hidden;
-  word-wrap: break-word;
-  display: flex;
-  flex-direction: row;
-  &:hover {
-    font-size: 18px;
-    transition: all 0.2s ease-in-out;
-  }
-  &:not(:hover) {
-    font-size: 14px;
-    transition: all 0.2s ease-in-out;
-  }
-}
-
-.deviceInfo {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-}
-
-.deviceSection {
-  width: 100%;
-  margin-top: 0.5rem;
-  height: calc(100vh - 80px);
-  overflow-y: auto;
-  padding-bottom: 2rem;
-}
-
-.deviceForm {
-  background-color: #fff;
-  border-radius: 1rem;
-  padding: 1rem;
-  width: 50%;
-  margin: auto;
-  font-size: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: start;
-  > * {
-    margin-bottom: 1rem;
-    width: 80%;
-  }
-  .fileDragger {
-    border-radius: 1rem;
-    width: 100%;
+  .lists {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 2rem;
-    p {
-      padding-top: 0.75rem;
+    margin: 0.5rem 0;
+    width: 250px;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding-bottom: 1rem;
+    .list {
+      margin: 0.5rem;
+      & > :nth-child(1) {
+        background-color: #f2f3f5;
+        font-size: 18px;
+        padding: 0.5rem 1rem;
+        overflow-y: hidden;
+        margin-bottom: 0;
+      }
+      .listHeader {
+        border-radius: 0.5rem;
+      }
+      background-color: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 4px 0 rgb(0 0 0 / 20%);
+      .listItem {
+        padding: 0.25rem 0.5rem;
+        overflow-y: hidden;
+        word-wrap: break-word;
+        display: flex;
+        flex-direction: row;
+        &:hover {
+          font-size: 18px;
+          transition: all 0.2s ease-in-out;
+        }
+        &:not(:hover) {
+          font-size: 14px;
+          transition: all 0.2s ease-in-out;
+        }
+      }
     }
   }
-  .selects {
-    max-width: 400px;
-    :nth-child(1) {
-      margin-right: 0.25rem;
+  .deviceSection {
+    width: 100%;
+    margin-top: 0.5rem;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding-bottom: 2rem;
+    .deviceForm {
+      background-color: #fff;
+      border-radius: 1rem;
+      padding: 1rem;
+      width: 50%;
+      margin: auto;
+      font-size: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: start;
+      > * {
+        margin-bottom: 1rem;
+        width: 80%;
+      }
+      .fileDragger {
+        border-radius: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 2rem;
+        p {
+          padding-top: 0.75rem;
+        }
+      }
+      .selects {
+        max-width: 400px;
+        :nth-child(1) {
+          margin-right: 0.25rem;
+        }
+        :nth-child(2) {
+          margin-left: 0.25rem;
+        }
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .additionalInfoSection {
+        :nth-child(1) {
+          margin-bottom: 0.5rem;
+        }
+      }
     }
-    :nth-child(2) {
-      margin-left: 0.25rem;
-    }
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
   }
-  .additionalInfoSection {
-    :nth-child(1) {
-      margin-bottom: 0.5rem;
+}
+
+@media (max-width: 500px) {
+  .adminSection {
+    height: unset;
+    flex-direction: column;
+    .lists {
+      margin: 0;
+      padding-bottom: 0;
+      width: 100%;
+      overflow-y: unset;
+      height: unset;
+      .list {
+        > :nth-child(1) {
+          border-radius: 10px;
+        }
+      }
+    }
+    .deviceSection {
+      width: 100%;
+      padding: 0 0.5rem 1rem 0.5rem;
+      height: unset;
+      .deviceForm {
+        overflow-y: unset;
+        width: 100%;
+        padding: 0.5rem 0;
+        .fileDragger {
+          padding: 0.25rem;
+        }
+      }
     }
   }
 }

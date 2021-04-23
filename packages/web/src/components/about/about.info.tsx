@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 export const sectionInfo = [
   {
     title: <> 😋 Что это за продукт?</>,

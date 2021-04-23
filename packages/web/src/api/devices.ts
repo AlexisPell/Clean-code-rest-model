@@ -24,33 +24,14 @@ export const fetchDevice = async (deviceId: number): Promise<IDevice | null> => 
   }
 };
 
-type InfoInputObj = {
-  title: string;
-  description: string;
-};
-interface CreateDeviceInput {
-  name: string;
-  price: number;
-  brandId?: number;
-  typeId?: number;
-  img: any;
-  info: InfoInputObj[];
-}
-type CreateDeviceOutput = Omit<CreateDeviceInput, 'info'> & { info: string };
-export const createDevice = async (deviceInfo: CreateDeviceInput): Promise<IDevice | null> => {
+export const createDevice = async (deviceInfo: FormData): Promise<IDevice | null> => {
   try {
     setBearerToken();
-
-    // Stringify info and parse it in backend
-    const deviceOutput: CreateDeviceOutput = {
-      ...deviceInfo,
-      info: JSON.stringify(deviceInfo.info),
-    };
 
     const device: AxiosResponse<IDevice> = await axios({
       method: 'post',
       url: `${process.env.BACKEND}/api/device/`,
-      data: deviceOutput,
+      data: deviceInfo,
     });
     return device.data;
   } catch (e) {

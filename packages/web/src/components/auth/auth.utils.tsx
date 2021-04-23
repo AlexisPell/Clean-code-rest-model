@@ -1,5 +1,4 @@
 import { Input, Form, message } from 'antd';
-import { MessageApi } from 'antd/lib/message';
 import Link from 'next/link';
 import { ChangeEvent, MutableRefObject, useRef, useState } from 'react';
 import styles from './auth.module.scss';

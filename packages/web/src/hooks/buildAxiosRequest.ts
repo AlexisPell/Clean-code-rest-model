@@ -1,4 +1,4 @@
-import axios, { AxiosStatic, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useState, useEffect, useReducer } from 'react';
 
 interface IAxiosResponse<D> {
@@ -31,16 +31,8 @@ export const buildAxiosRequest = <D>(axiosConfig: AxiosRequestConfig) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        console.log(
-          '🚀 ~ file: buildAxiosRequest.ts ~ line 36 ~ fetchData ~ axiosConfig',
-          axiosConfig
-        );
 
         const axiosResponse = await axios(axiosConfig);
-        console.log(
-          '🚀 ~ file: buildAxiosRequest.ts ~ line 36 ~ fetchData ~ axiosResponse',
-          axiosResponse
-        );
 
         setRes(axiosResponse);
       } catch (e) {

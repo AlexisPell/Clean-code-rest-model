@@ -1,20 +1,11 @@
-// private
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
 
-interface BasketProps {
-  ssrString: string;
-}
+import BasketPage from 'src/pages/basket/index';
 
-const Basket: NextPage<BasketProps> = ({ ssrString }) => {
-  return <section>Basket section</section>;
+interface BasketProps {}
+
+const Basket: NextPage<BasketProps> = () => {
+  return <BasketPage title='Online Consumer | Basket' />;
 };
-
-export function getStaticProps() {
-  const ssrString = 'i m from server';
-  return { props: { ssrString } };
-}
 
 export default Basket;

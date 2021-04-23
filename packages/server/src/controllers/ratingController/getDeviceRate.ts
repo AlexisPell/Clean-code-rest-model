@@ -28,7 +28,7 @@ export const buildGetDeviceRate = (Rating: ModelCtor<IRating>) => async (
     const medianRate = ratesSum / rates.length;
 
     res.json({
-      rating: medianRate,
+      rate: medianRate,
     });
   } catch (error) {
     next(errorHandler(500, error.message));

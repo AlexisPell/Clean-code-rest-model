@@ -3,8 +3,6 @@ import { IDevice, IBrand, IType } from 'src/typings';
 import { IRootStore } from './index';
 import _ from 'lodash';
 
-import { fetchDevice } from 'src/api/devices';
-
 export class DeviceStore {
   // state
   _loading: boolean = false;
@@ -29,6 +27,9 @@ export class DeviceStore {
   };
   removeDevice = (deviceId: IDevice['id']) => {
     this._devices = this._devices.filter((d) => d.id !== deviceId);
+  };
+  addDevice = (device: IDevice) => {
+    this._devices = [...this._devices, device];
   };
   // Brands
   setBrands = (brands: IBrand[]) => {

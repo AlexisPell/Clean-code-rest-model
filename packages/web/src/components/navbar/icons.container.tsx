@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './navbar.module.scss';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -7,7 +7,6 @@ import { LoginOutlined, LogoutOutlined, ShoppingOutlined, UserOutlined } from '@
 import { onHoverWhiteColor } from 'src/styles/animationProps';
 import { useStore } from 'src/mobx/index';
 import { observer } from 'mobx-react-lite';
-import { checkIfLogged } from 'src/hooks/checkIfLogged';
 
 interface IconsProps {}
 

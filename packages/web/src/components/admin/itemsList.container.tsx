@@ -66,7 +66,7 @@ const ItemsList: React.FC<ItemsListProps> = ({
   return (
     <div className={styles.lists}>
       <div className={styles.list}>
-        <h3 className={styles.listItemHeader}>
+        <h3 className={styles.listHeader}>
           Types{' '}
           <Tooltip title='Add a new type' placement='right'>
             <a>

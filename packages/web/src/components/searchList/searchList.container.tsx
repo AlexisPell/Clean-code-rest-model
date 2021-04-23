@@ -27,7 +27,7 @@ const SearchList: React.FC<SearchListProps> = () => {
   return (
     <div className={styles.container}>
       <div className={styles.list}>
-        <h3>Categories</h3>
+        <h3>Types</h3>
         {types.map((type) => (
           <div
             key={type.id}

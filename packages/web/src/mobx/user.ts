@@ -9,7 +9,6 @@ export class UserStore {
 
   constructor(rootStore: IRootStore) {
     makeAutoObservable(this);
-    rootStore.userStore;
   }
 
   setIsAuth = (authStatus: boolean) => {

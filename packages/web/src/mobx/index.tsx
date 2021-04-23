@@ -3,6 +3,7 @@ import { enableStaticRendering } from 'mobx-react-lite';
 
 import { UserStore } from './user';
 import { DeviceStore } from './device';
+import { BasketStore } from './basket';
 
 export { RootStore, StoreProvider, useStore };
 export type IRootStore = InstanceType<typeof RootStore>;
@@ -12,9 +13,11 @@ enableStaticRendering(typeof window === 'undefined');
 class RootStore {
   userStore: UserStore;
   deviceStore: DeviceStore;
+  basketStore: BasketStore;
   constructor() {
     this.userStore = new UserStore(this);
     this.deviceStore = new DeviceStore(this);
+    this.basketStore = new BasketStore(this);
   }
 }
 

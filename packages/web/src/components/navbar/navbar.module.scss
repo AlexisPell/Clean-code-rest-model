@@ -14,44 +14,56 @@
   > :nth-child(3) {
     margin-left: auto;
   }
-}
-
-.logo {
-  transform: skew(-5deg);
-  border-radius: 50px;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: row;
-  > :nth-child(1) {
-    align-self: center;
-    font-size: 30px;
-    margin: 0 0.25rem;
+  .logo {
+    transform: skew(-5deg);
+    border-radius: 50px;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: row;
+    > :nth-child(1) {
+      align-self: center;
+      font-size: 30px;
+      margin: 0 0.25rem;
+    }
+    > :nth-child(2) {
+      font-size: 26px;
+      font-weight: 500;
+    }
   }
-  > :nth-child(2) {
-    font-size: 26px;
-    font-weight: 500;
+  .links {
+    display: flex;
+    flex-direction: row;
+    > * {
+      margin-right: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+    }
   }
-}
-
-.links {
-  display: flex;
-  flex-direction: row;
-  > * {
+  .icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     margin-right: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
+    > * {
+      font-size: 22px;
+      margin-left: 0.25rem;
+      padding: 0.25rem 0.25rem;
+      border-radius: 15px;
+    }
   }
 }
 
-.icons {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-right: 0.5rem;
-  > * {
-    font-size: 22px;
-    margin-left: 0.25rem;
-    padding: 0.25rem 0.25rem;
-    border-radius: 15px;
+@media (max-width: 500px) {
+  .container {
+    height: 120px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    > :nth-child(1) {
+      margin: auto;
+    }
+    > :nth-child(3) {
+      margin: auto;
+    }
   }
 }

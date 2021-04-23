@@ -1,6 +1,5 @@
 import { ShopOutlined } from '@ant-design/icons';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import IconsPanel from './icons.container';
 import styles from './navbar.module.scss';

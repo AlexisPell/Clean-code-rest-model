@@ -1,12 +1,11 @@
 import { InboxOutlined } from '@ant-design/icons';
-import { Button, Input, message, Select, Tooltip, Upload } from 'antd';
-import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
+import { Button, Input, Select, Tooltip, Upload } from 'antd';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Device from 'src/components/device/device.container';
 import { useStore } from 'src/mobx';
 import styles from './admin.module.scss';
-import { additionalInfoSectionRenderer } from './deviceForm.utils';
+import { additionalInfoSectionRenderer, saveDevice, setFileToForm } from './deviceForm.utils';
 
 const { Option } = Select;
 const { Dragger } = Upload;
@@ -31,44 +30,22 @@ export interface IFormState {
 // if takes deviceId - shows it info, else - shows form to create new device
 const DeviceForm: React.FC<DeviceFormProps> = ({ deviceId, setDeviceId }) => {
   const {
-    deviceStore: { brands, types },
+    deviceStore: { brands, types, addDevice },
   } = useStore();
 
   const [formState, setFormState] = useState<IFormState>({
     img: null,
     name: '',
-    price: 0,
+    price: 100000,
     brandId: null,
     typeId: null,
-    info: [{ title: 'title', description: 'descr' }],
+    info: [{ title: '', description: '' }],
   });
-  const { img, name, price, brandId, typeId, info } = formState;
+  const { name, price, info } = formState;
 
-  const onChangeFile = (info: UploadChangeParam<UploadFile<any>>) => {
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    }
-    if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed`);
-    }
-    console.log('🚀 ~ file: deviceForm.container.tsx ~ line 36 ~ onChangeFile ~ info', info);
-    setFormState({ ...formState, img: info.file });
-    // {
-    //  name: 'iphone'
-    //  data: <Buffer ff d8 ff e0 .... >
-    //  size: number
-    //  encoding: '7bit'
-    //  tempFilePath: ''
-    //  truncated: false,
-    //  mimetype: 'image/jpeg'
-    //  md5: 'uuid35325sdfsdfgw53'
-    //  mv: Function
-    // }
-  };
-
-  console.log('FORM: ', formState);
-
-  const onChange = (e: any) => setFormState({ ...formState, [e.target.name]: e.target.value });
+  const onChangeInput = (e: any) => setFormState({ ...formState, [e.target.name]: e.target.value });
+  const onChangeFile = setFileToForm(setFormState, formState);
+  const createNewDevice = saveDevice(addDevice, setDeviceId);
 
   const form = (
     <motion.div
@@ -77,7 +54,13 @@ const DeviceForm: React.FC<DeviceFormProps> = ({ deviceId, setDeviceId }) => {
       exit={hideToLeft}
       className={styles.deviceForm}
     >
-      <Dragger name='file' onChange={onChangeFile} maxCount={1} className={styles.fileDragger}>
+      <Dragger
+        // beforeUpload={() => false}
+        name='file'
+        onChange={onChangeFile}
+        maxCount={1}
+        className={styles.fileDragger}
+      >
         <InboxOutlined style={{ fontSize: '50px', color: '#4fa9fc' }} />
         <p style={{ fontSize: '24px' }}>Click or drag file to this area to upload image</p>
       </Dragger>
@@ -114,7 +97,7 @@ const DeviceForm: React.FC<DeviceFormProps> = ({ deviceId, setDeviceId }) => {
         type='text'
         name='name'
         value={name}
-        onChange={onChange}
+        onChange={onChangeInput}
         placeholder='Name of device'
       />
       <Input
@@ -122,18 +105,23 @@ const DeviceForm: React.FC<DeviceFormProps> = ({ deviceId, setDeviceId }) => {
         type='number'
         name='price'
         value={price}
-        onChange={onChange}
+        onChange={onChangeInput}
         placeholder='Price of device'
       />
       {additionalInfoSectionRenderer(info, setFormState, formState)}
       <Tooltip title='each device may have unlimited number of descriptions'>
-        <Button
-          onClick={() =>
-            setFormState({ ...formState, info: [...info, { title: '', description: '' }] })
-          }
-        >
-          Add info
-        </Button>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Button
+            onClick={() =>
+              setFormState({ ...formState, info: [...info, { title: '', description: '' }] })
+            }
+          >
+            Add info
+          </Button>
+          <Button type='primary' onClick={() => createNewDevice(formState)}>
+            Save device
+          </Button>
+        </div>
       </Tooltip>
     </motion.div>
   );

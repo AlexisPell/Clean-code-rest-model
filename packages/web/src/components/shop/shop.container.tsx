@@ -3,11 +3,27 @@ import styles from './shop.module.scss';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'src/mobx/index';
+import { Pagination } from 'antd';
 
 import { header } from './shop.utils';
 import DeviceInfo from 'src/components/device/device.container';
 
 interface ShopProps {}
+
+const hideToLeft = {
+  x: '-100vw',
+  height: 0,
+  display: 'none',
+  opacity: 0,
+  transition: { ease: 'easeIn' },
+};
+const showFromLeft = {
+  x: '0',
+  height: '100%',
+  display: 'block',
+  opacity: 1,
+  transition: { ease: 'easeOut', delay: 0.15 },
+};
 
 const Shop: React.FC<ShopProps> = observer(() => {
   const {
@@ -15,8 +31,6 @@ const Shop: React.FC<ShopProps> = observer(() => {
   } = useStore();
 
   const listAnimations = useAnimation();
-  const hideToLeft = { x: '-100vw', opacity: 0, transition: { ease: 'easeIn' } };
-  const showFromLeft = { x: '0', opacity: 1, transition: { ease: 'easeOut', delay: 0.15 } };
 
   const [chosenDevice, setChosenDevice] = useState<null | number>(null);
 
@@ -33,15 +47,19 @@ const Shop: React.FC<ShopProps> = observer(() => {
   return (
     <section className={styles.shop}>
       <div>{header(brand, type)}</div>
-      <motion.div animate={listAnimations} className={styles.devicesList}>
+      <motion.div animate={listAnimations} className={chosenDevice ? null : styles.devicesList}>
         {devices.map((device) => (
           <div key={device.id} className={styles.device} onClick={() => openDeviceInfo(device.id)}>
             <div className={styles.deviceImg}>
               <img src={`${process.env.BACKEND}/${device.img}`} alt='device photo' />
             </div>
-            <div className={styles.deviceInfo}>Device info: {device.name}</div>
+            <div className={styles.deviceInfo}>
+              <span>{device.name}</span>
+              <span>{device.price}$</span>
+            </div>
           </div>
         ))}
+        <Pagination defaultCurrent={1} total={50} />
       </motion.div>
       <AnimatePresence>
         {chosenDevice && <DeviceInfo deviceId={chosenDevice} setDeviceId={closeDeviceInfo} />}
