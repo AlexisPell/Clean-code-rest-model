@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './navbar.module.scss';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { message, Tooltip } from 'antd';
 import { LoginOutlined, LogoutOutlined, ShoppingOutlined, UserOutlined } from '@ant-design/icons';
@@ -11,6 +12,7 @@ import { observer } from 'mobx-react-lite';
 interface IconsProps {}
 
 const Icons: React.FC<IconsProps> = observer(() => {
+  const router = useRouter();
   const {
     userStore: { isAuthorized, logout, user },
   } = useStore();
@@ -46,6 +48,7 @@ const Icons: React.FC<IconsProps> = observer(() => {
                 onClick={() => {
                   logout();
                   message.success('User session was closed');
+                  router.reload();
                 }}
               />
             </motion.div>
