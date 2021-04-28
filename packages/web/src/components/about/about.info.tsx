@@ -60,7 +60,14 @@ export const sectionInfo = [
           <strong>UI Animations</strong> - <i>Framer Motion</i>
         </h4>
         <h4>
-          <strong>State management</strong> - <i>Mobx lite</i>
+          <strong>State management</strong> -{' '}
+          <i>
+            Mobx lite. The chosen approach for this current product was in separing Mobx from API
+            requests. Every stick has two ends. And it probably could be better to implement Api
+            into Mobx, instead of how it is done here. Handling api with react hooks is quite good
+            approach in microfrontend pattern, so i decided to try it up and fully separed local
+            store from remote fetching
+          </i>
         </h4>
         <h4>
           <strong>SEO optimization</strong> - <i>Next js</i>

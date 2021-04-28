@@ -1,5 +1,5 @@
 import { IUser } from './../types/types';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 
 import { MyRequest } from './../types/express';
 import { NextFunction, Response } from 'express';
@@ -18,12 +18,20 @@ export const authorized = (role?: IRole) => (req: MyRequest, res: Response, next
     const token = req.headers.authorization?.split(' ')[1]; // Bearer token
 
     if (!token) {
-      return res.status(401).json(routeInfo('Unauthorized'));
+      return res.status(401).json(routeInfo('Middleware check: unauthorized'));
     }
 
     const decoded = jwt.verify(token, (process as any).env.SECRET_KEY);
-    if ((decoded as IUser).role !== role || (decoded as IUser).role !== 'ADMIN') {
-      return res.status(401).json(routeInfo('No access to this route'));
+
+    if (
+      role === 'USER' &&
+      !((decoded as IUser).role === 'USER' || (decoded as IUser).role === 'ADMIN')
+    ) {
+      return res.status(401).json(routeInfo('Middleware check: no user access to this route'));
+    }
+
+    if (role === 'ADMIN' && (decoded as IUser).role !== 'ADMIN') {
+      return res.status(401).json(routeInfo('Middleware check: no admin access to this route'));
     }
 
     req.user = decoded as IUser;

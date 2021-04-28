@@ -5,21 +5,27 @@ export async function getAllDevices(
   brandId: number,
   typeId: number,
   limit: number,
-  offset: number
+  // offset: number
+  page: number
 ) {
-  let devices: IDevice[] = [];
+  page = page || 1;
+  limit = limit || 9;
+
+  let offset = page * limit - limit;
+
+  let devices = {};
 
   if (!brandId && !typeId) {
-    devices = await Device.findAll({ limit, offset });
+    devices = await Device.findAndCountAll({ limit, offset });
   }
   if (brandId && !typeId) {
-    devices = await Device.findAll({ where: { brandId }, limit, offset });
+    devices = await Device.findAndCountAll({ where: { brandId }, limit, offset });
   }
   if (!brandId && typeId) {
-    devices = await Device.findAll({ where: { typeId }, limit, offset });
+    devices = await Device.findAndCountAll({ where: { typeId }, limit, offset });
   }
   if (brandId && typeId) {
-    devices = await Device.findAll({ where: { brandId, typeId }, limit, offset });
+    devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset });
   }
 
   return devices;

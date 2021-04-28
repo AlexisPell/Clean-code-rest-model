@@ -11,12 +11,7 @@ export const buildGetAllDevices = (Device: ModelCtor<IDevice>) => async (
 ) => {
   let { brandId, typeId, limit, page }: any = req.query;
 
-  page = page || 1;
-  limit = page * limit || 9;
-
-  let offset = page * limit - limit;
-
-  const devices = await getAllDevices(Device, brandId, typeId, limit, offset);
+  const devices = await getAllDevices(Device, brandId, typeId, limit, page);
 
   res.json(devices);
 };

@@ -23,7 +23,7 @@ export const rateDevice = async (
     setBearerToken();
     const res = await axios({
       method: 'post',
-      url: `${process.env.BACKEND}/api/basket?deviceId=${deviceId}`,
+      url: `${process.env.BACKEND}/api/rate?deviceId=${deviceId}`,
       data: { rate },
     });
     return res.data;

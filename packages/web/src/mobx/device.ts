@@ -1,10 +1,11 @@
-import { flow, makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { IDevice, IBrand, IType } from 'src/typings';
 import { IRootStore } from './index';
 import _ from 'lodash';
 
 export class DeviceStore {
   // state
+  _rootStore: IRootStore;
   _loading: boolean = false;
   _devices: Partial<IDevice>[] = [];
   _brands: Partial<IBrand>[] = [];
@@ -15,6 +16,7 @@ export class DeviceStore {
 
   constructor(rootStore: IRootStore) {
     makeAutoObservable(this);
+    this._rootStore = rootStore;
   }
 
   // // actions // //
@@ -37,6 +39,7 @@ export class DeviceStore {
   };
   findBrand = (brandId: IBrand['id']) => {
     this._brand = _(this.brands).find((b) => b.id === brandId);
+    this._rootStore.paginationStore.setPage(1);
   };
   addBrand = (brand: IBrand) => {
     this._brands = [...this._brands, brand];
@@ -50,6 +53,7 @@ export class DeviceStore {
   };
   findType = (typeId: IType['id']) => {
     this._type = _(this.types).find((t) => t.id === typeId);
+    this._rootStore.paginationStore.setPage(1);
   };
   addType = (type: IType) => {
     this._types = [...this._types, type];

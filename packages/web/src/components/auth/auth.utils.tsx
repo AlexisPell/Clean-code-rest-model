@@ -131,18 +131,20 @@ export const RenderLink = ({ isLoggining }: { isLoggining: boolean }) => {
   );
 };
 
-export const validateData = (form: Partial<IFormState>, isLoggining: boolean): IFormState | any => {
-  if (!form) {
-    return message.warning('Form may not be blank');
-  }
-  if (!form.email.includes('@')) {
-    return message.warning('Invalid email, check typings');
-  }
-  if (form.password.length < 5) {
-    return message.warning('Password should be 6 chars at least');
-  }
-  if (!isLoggining && form.password !== form.password2) {
-    return message.warn('Passwords do not match each other :p');
-  }
-  return form;
+export const validateData = (
+  form: Partial<IFormState>,
+  isLoggining: boolean
+): { form: Partial<IFormState>; errors: string[] } => {
+  let errors = [];
+
+  if (!form) errors.push('Form may not be blank');
+
+  if (!form?.email.includes('@')) errors.push('Invalid email, check typings');
+
+  if (form?.password.length < 6) errors.push('Password should be 6 chars at least');
+
+  if (!isLoggining && form?.password !== form?.password2)
+    errors.push('Passwords do not match each other :p');
+
+  return { form, errors };
 };

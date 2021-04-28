@@ -31,7 +31,7 @@ const main = async () => {
   app.use('/api', router);
 
   // documentation
-  app.get('/api/documentation', (req, res) => {
+  app.get('/api/documentation', (req: any, res: any) => {
     res.sendFile(path.join(__dirname, 'public', 'documentation.html'));
   });
 

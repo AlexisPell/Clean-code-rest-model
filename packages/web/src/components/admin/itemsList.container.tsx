@@ -4,7 +4,6 @@ import { Tooltip, Modal, message } from 'antd';
 import { DeleteOutlined, ExclamationCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { deleteBrand } from 'src/api/brands';
 import { deleteType } from 'src/api/types';
-// import {  } from 'src/api/devices';
 import { useStore } from 'src/mobx';
 import { IBrand, IDevice, IType } from 'src/typings';
 import { deleteDevice } from 'src/api/devices';
@@ -16,12 +15,7 @@ interface ItemsListProps {
   setModalType: (str: 'type' | 'brand') => void;
 }
 
-const ItemsList: React.FC<ItemsListProps> = ({
-  deviceId,
-  setDeviceId,
-  setModalType,
-  setModalVisible,
-}) => {
+const ItemsList: React.FC<ItemsListProps> = ({ setDeviceId, setModalType, setModalVisible }) => {
   const {
     deviceStore: { devices, brands, types, removeBrand, removeType, removeDevice },
   } = useStore();

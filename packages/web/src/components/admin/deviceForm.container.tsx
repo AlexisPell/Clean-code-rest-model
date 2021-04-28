@@ -134,7 +134,10 @@ const DeviceForm: React.FC<DeviceFormProps> = ({ deviceId, setDeviceId }) => {
           <Device
             deviceId={deviceId}
             setDeviceId={setDeviceId}
-            style={{ top: '55%', left: '55%' }}
+            style={
+              window.innerWidth < 500 ? { top: '45%', left: '50%' } : { top: '55%', left: '55%' }
+            }
+            fadeIn={window.innerWidth < 500}
           />
         )}
       </AnimatePresence>

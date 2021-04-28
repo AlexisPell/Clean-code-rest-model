@@ -16,7 +16,7 @@ export const addDeviceToBasket = async (deviceId: number): Promise<{ msg: string
   }
 };
 
-export const removeDeviceFromBasket = async (deviceId: number): Promise<{ msg: string }> => {
+export const deleteDeviceFromBasket = async (deviceId: number): Promise<{ msg: string }> => {
   try {
     setBearerToken();
     const res = await axios({

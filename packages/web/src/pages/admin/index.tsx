@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 import { fetchDevices } from 'src/api/devices';
 import { fetchTypes } from 'src/api/types';
@@ -15,7 +14,7 @@ function fetchItems() {
 
   useEffect(() => {
     (async () => {
-      const devices = await fetchDevices();
+      const { rows: devices } = await fetchDevices();
       const types = await fetchTypes();
       const brands = await fetchBrands();
       deviceStore.setDevices(devices || []);

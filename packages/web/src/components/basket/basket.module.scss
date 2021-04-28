@@ -1,0 +1,51 @@
+.basket {
+  margin: auto;
+  margin-top: 1rem;
+  width: 80%;
+  height: 100%;
+  .basketDevices {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    .basketDevice {
+      font-size: 20px;
+      width: 100%;
+      background-color: #fbcdff;
+      padding: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .basketDeviceNumbers {
+        :nth-child(1) {
+          background-color: #fbcdff;
+          width: 30px;
+          height: 30px;
+        }
+        :nth-child(2) {
+          padding-bottom: 2px;
+          font-size: 30px;
+        }
+        :nth-child(3) {
+          background-color: #fbcdff;
+          width: 30px;
+          height: 30px;
+        }
+        :nth-child(4) {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+  .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 500px) {
+  .basket {
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+}

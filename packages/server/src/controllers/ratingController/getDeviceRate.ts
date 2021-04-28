@@ -25,7 +25,9 @@ export const buildGetDeviceRate = (Rating: ModelCtor<IRating>) => async (
       .value();
 
     const ratesSum = rates.reduce((prev, curr) => (prev += curr), 0);
-    const medianRate = ratesSum / rates.length;
+    let medianRate = ratesSum / rates.length;
+
+    if (!medianRate) medianRate = 0;
 
     res.json({
       rate: medianRate,

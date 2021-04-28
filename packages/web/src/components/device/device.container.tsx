@@ -1,54 +1,44 @@
-import React from 'react';
+import { LeftOutlined, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
+import { Button, message, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
-import styles from './device.module.scss';
-import { LeftOutlined, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
-import { loadDevice } from './device.utils';
-import { Button, message, Tooltip } from 'antd';
+import React, { useState } from 'react';
 import { addDeviceToBasket } from 'src/api/basket';
-
-const initialAnimationState = { x: '100vw', opacity: 0 };
-const showFromRight = { x: '0', opacity: 1, transition: { ease: 'easeOut', delay: 0.15 } };
-const hideToRight = { x: '100vw', opacity: 0, transition: { ease: 'easeIn' } };
+import styles from './device.module.scss';
+import { deviceRate, loadDevice, renderAdditionalInfo } from './device.utils';
+import RateDeviceModal from './rateDeviceModal.container';
 
 interface DeviceProps {
   deviceId: number;
   setDeviceId: (deviceId: number) => any;
   style?: Record<string, any>;
+  fadeIn?: boolean;
 }
 
-const Device: React.FC<DeviceProps> = observer(({ deviceId, setDeviceId, style }) => {
+const Device: React.FC<DeviceProps> = observer(({ deviceId, setDeviceId, style, fadeIn }) => {
+  const initialAnimationState = { x: '100vw', opacity: 0, display: fadeIn ? 'none' : 'inherit' };
+  const showFromRight = {
+    x: '0',
+    opacity: 1,
+    display: fadeIn ? 'block' : 'inherit',
+    transition: { ease: 'easeOut', delay: 0.15 },
+  };
+  const hideToRight = { x: '100vw', opacity: 0, transition: { ease: 'easeIn' } };
+
+  const [rateDeviceModal, setRateDeviceModal] = useState(false);
+
   const { device } = loadDevice(deviceId);
+  const { currentRate, setCurrentRate } = deviceRate({
+    deviceId,
+    rateDeviceModal,
+    setRateDeviceModal,
+  });
 
   const backToDevicesList = () => setDeviceId(null);
 
   const setDeviceToBasket = (deviceId: number) => {
     addDeviceToBasket(deviceId);
     message.success('Device added to basket');
-  };
-
-  const renderAdditionalInfo = () => {
-    let info;
-    if (!device.info?.length) info = <></>;
-    if (device.info?.length)
-      info = (
-        <div
-          style={{
-            marginTop: '.5rem',
-            paddingTop: '.5rem',
-            borderTop: '1px solid grey',
-            width: '100%',
-          }}
-        >
-          {device.info.map((i) => (
-            <div key={i.id} style={{ overflowWrap: 'anywhere' }}>
-              <strong>{i.title}: </strong>
-              <span>{i.description}</span>
-            </div>
-          ))}
-        </div>
-      );
-    return info;
   };
 
   const deviceUi = () => (
@@ -59,13 +49,15 @@ const Device: React.FC<DeviceProps> = observer(({ deviceId, setDeviceId, style }
       <div className={styles.deviceDescription}>
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
           <div>{device.name}</div>{' '}
-          <div>
-            {device.rating === 0 ? 'No rates yet ' : device.rating}
-            <StarOutlined style={{ fontSize: 30, color: 'gold' }} />
-          </div>
+          <Tooltip title='Rate device'>
+            <div onClick={() => setRateDeviceModal(true)}>
+              {currentRate === 0 ? 'No rates yet ' : `${currentRate} `}
+              <StarOutlined style={{ fontSize: 30, color: 'gold', paddingTop: '5px' }} />
+            </div>
+          </Tooltip>
         </div>
         <div>{device.price} $</div>
-        {renderAdditionalInfo()}
+        {renderAdditionalInfo(device)}
         <Tooltip title='Add to shopping basket'>
           <Button
             style={{ margin: 'auto', marginTop: '1rem' }}
@@ -91,6 +83,14 @@ const Device: React.FC<DeviceProps> = observer(({ deviceId, setDeviceId, style }
         </div>
         {device && deviceUi()}
       </motion.div>
+      {rateDeviceModal && (
+        <RateDeviceModal
+          visible={rateDeviceModal}
+          setVisible={setRateDeviceModal}
+          deviceId={deviceId}
+          setCurrentRate={setCurrentRate}
+        />
+      )}
     </div>
   );
 });

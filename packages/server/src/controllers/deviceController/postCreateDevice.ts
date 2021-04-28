@@ -24,10 +24,7 @@ export const buildPostCreateDevice = (
 ) => async (req: MyRequest, res: Response, next: NextFunction) => {
   try {
     let { name, price, brandId, typeId, info }: IRequestBody = req.body;
-    console.log('🚀 ~ file: postCreateDevice.ts ~ line 27 ~ )=> ~ req.files', req.files);
-    console.log('🚀 ~ file: postCreateDevice.ts ~ line 27 ~ )=> ~ req.body', req.body);
     const { img }: string | any = req.files;
-    console.log('🚀 ~ file: postCreateDevice.ts ~ line 28 ~ )=> ~ img', img);
 
     checkSameDevice(Device, name, errorHandler, next);
 
@@ -44,7 +41,6 @@ export const buildPostCreateDevice = (
 
     if (info) {
       let parsedInfo = JSON.parse(info);
-      console.log('🚀 ~ file: postCreateDevice.ts ~ line 44 ~ )=> ~ parsedInfo', parsedInfo);
       // sync creating without await
       parsedInfo.forEach((i: IDeviceInfo) => {
         DeviceInfo.create({

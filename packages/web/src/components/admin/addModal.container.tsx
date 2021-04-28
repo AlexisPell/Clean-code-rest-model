@@ -5,11 +5,6 @@ import { createBrand } from 'src/api/brands';
 import { createType } from 'src/api/types';
 import { useStore } from 'src/mobx';
 
-interface ModalProps {
-  visible: boolean;
-  modal: 'type' | 'brand';
-}
-
 interface AddModalProps {
   visible: boolean;
   setVisible: (...any) => void;

@@ -2,11 +2,11 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "lib": ["ESNext"],
+    "lib": ["ES5"],
     "skipLibCheck": true,
     "sourceMap": true,
     "outDir": "./dist",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,

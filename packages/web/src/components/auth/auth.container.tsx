@@ -21,16 +21,18 @@ const Auth: React.FC<AuthProps> = observer(({ isRegistering }) => {
   const getDataFromForm = (_formData: IFormState) => (formData.current = _formData);
 
   const sendForm = async () => {
-    const validatedData = validateData(formData.current, !isRegistering);
+    const { errors, form } = validateData(formData.current, !isRegistering);
+    if (errors.length) return errors.forEach((e) => message.warning(e));
 
     let user;
+
     if (isRegistering) {
-      user = await register(validatedData.email, validatedData.password);
+      user = await register(form.email, form.password);
       if (user === null)
         return message.error('User with such email already registered. Please, log in :)');
     }
     if (!isRegistering) {
-      user = await login(validatedData.email, validatedData.password);
+      user = await login(form.email, form.password);
       if (user === null) return message.warning('Wrong credentials. Please, try again :)');
     }
     userStore.setUser(user);
@@ -42,13 +44,7 @@ const Auth: React.FC<AuthProps> = observer(({ isRegistering }) => {
     <section className={`section-container ${styles.auth}`}>
       <RenderForm isLoggining={!isRegistering} sendDataToParent={getDataFromForm} />
       <RenderLink isLoggining={!isRegistering} />
-      <Button
-        size='large'
-        type='text'
-        style={{ marginTop: '2rem' }}
-        className={styles.button}
-        onClick={() => sendForm()}
-      >
+      <Button size='large' type='text' className={styles.button} onClick={() => sendForm()}>
         {!isRegistering ? 'Log in your account' : 'Register your account'}
       </Button>
     </section>

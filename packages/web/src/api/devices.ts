@@ -2,9 +2,18 @@ import { IDevice } from 'src/typings/index';
 import axios, { AxiosResponse } from 'axios';
 import { setBearerToken } from 'src/utils/setBearerToken';
 
-export const fetchDevices = async () => {
+export const fetchDevices = async (
+  typeId?: number,
+  brandId?: number,
+  page?: number,
+  limit?: number
+) => {
   try {
-    const devices: AxiosResponse<IDevice[]> = await axios.get(`${process.env.BACKEND}/api/device/`);
+    const devices: AxiosResponse<{ count: number; rows: IDevice[] }> = await axios({
+      url: `${process.env.BACKEND}/api/device/`,
+      method: 'get',
+      params: { typeId, brandId, page, limit },
+    });
     return devices.data;
   } catch (e) {
     console.log('Error fetching devices: ', e);
