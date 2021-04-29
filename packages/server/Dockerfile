@@ -7,12 +7,12 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package.json ./
-COPY yarn.lock ./
+# COPY yarn.lock ./
 
 RUN yarn
 
 COPY . .
-COPY .env.production .env
+# COPY .env.production config.env
 
 RUN yarn build
 

@@ -17,6 +17,8 @@ dotenv.config({ path: path.join(__dirname, '../config.env') });
 const main = async () => {
   const app = express();
 
+  app.set('trust proxy', 1);
+
   // DB
   await sequelize.authenticate(); // make connection to db
   // await sequelize.sync({ force: true }); // syncronize db state ee
