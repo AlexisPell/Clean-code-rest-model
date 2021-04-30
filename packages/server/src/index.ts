@@ -17,14 +17,13 @@ dotenv.config({ path: path.join(__dirname, '../config.env') });
 const main = async () => {
   const app = express();
 
-  app.set('trust proxy', 1);
+  // app.set('trust proxy', 1);
 
   // DB
   await sequelize.authenticate(); // make connection to db
-  // await sequelize.sync({ force: true }); // syncronize db state ee
 
   // 3-rd side packages
-  app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL || 'http://localhost:3000' }));
+  app.use(cors({ credentials: true, origin: true }));
   app.use(express.json());
   app.use(fileUpload());
   app.use(helmet());
@@ -33,7 +32,7 @@ const main = async () => {
   app.use('/api', router);
 
   // documentation
-  app.get('/api/documentation', (req: any, res: any) => {
+  app.get('/api/documentation', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'documentation.html'));
   });
 

@@ -4,7 +4,7 @@ import { IRootStore } from './index';
 export class PaginationStore {
   _page = 1; // current page with items
   _totalCount = 0; // total num of items
-  _pageLimit = 2; // limit of items per page
+  _pageLimit = 4; // limit of items per page
 
   constructor(rootStore: IRootStore) {
     makeAutoObservable(this);

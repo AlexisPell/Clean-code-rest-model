@@ -8,20 +8,25 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 
 export const handlePagination = () => {
   const {
-    deviceStore: { brand, type, setDevices },
+    deviceStore: { brand, type, setDevices, devices },
     paginationStore: { totalCountItems, pageLimit, page, setPage, setTotalCount },
   } = useStore();
 
   useEffect(() => {
     const paginateDevicesFromServer = async () => {
       const { count, rows } = await fetchDevices(type?.id, brand?.id, page, pageLimit);
-      setDevices(rows);
-      setTotalCount(count);
+      console.log(
+        '🚀 ~ file: shop.utils.tsx ~ line 18 ~ paginateDevicesFromServer ~ count',
+        count,
+        rows
+      );
+      if (rows) setDevices(rows);
+      if (count) setTotalCount(count);
     };
     paginateDevicesFromServer();
   }, [page, type, brand, pageLimit]);
 
-  return { totalCountItems, pageLimit, page, setPage, brand, type };
+  return { totalCountItems, pageLimit, page, setPage, brand, type, devices };
 };
 
 export const devicesList = (
@@ -32,7 +37,8 @@ export const devicesList = (
     deviceStore: { devices },
   } = useStore();
 
-  if (!devices.length) return <h1>No devices satisfy chosen filters</h1>;
+  if (!devices.length)
+    return <h1 style={{ fontSize: '22px' }}>No devices satisfy chosen filters</h1>;
 
   if (devices.length)
     return devices.map((device) => (

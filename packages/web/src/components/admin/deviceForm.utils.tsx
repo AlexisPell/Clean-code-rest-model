@@ -8,7 +8,8 @@ import { IFormState } from './deviceForm.container';
 
 export function saveDevice(
   addDevice: (device: IDevice) => void,
-  setDeviceId: (...any: any) => void
+  setDeviceId: (...any: any) => void,
+  setFormState: (value: React.SetStateAction<IFormState>) => void
 ) {
   return async (formState: IFormState) => {
     const { error, validatedForm } = validateFormState(formState);
@@ -26,6 +27,14 @@ export function saveDevice(
     const newDevice = await createDevice(formData);
     message.success(`Device ${newDevice.name} was successfully added`);
     addDevice(newDevice);
+    setFormState({
+      img: null,
+      name: '',
+      price: 0,
+      brandId: null,
+      typeId: null,
+      info: [{ title: '', description: '' }],
+    });
     setDeviceId(newDevice.id);
   };
 }

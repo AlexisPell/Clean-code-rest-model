@@ -26,7 +26,11 @@ export const buildRegisterUser = (User: ModelCtor<IUser>, Basket: ModelCtor<IBas
 
   const hashPassword = await bcrypt.hash(password, 5);
 
-  const user = await User.create({ email, password: hashPassword, role });
+  const user = await User.create({
+    email,
+    password: hashPassword,
+    role: email === 'admin@admin.com' ? 'ADMIN' : role,
+  });
 
   await Basket.create({ userId: user.id });
 

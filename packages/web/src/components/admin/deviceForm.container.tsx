@@ -36,7 +36,7 @@ const DeviceForm: React.FC<DeviceFormProps> = ({ deviceId, setDeviceId }) => {
   const [formState, setFormState] = useState<IFormState>({
     img: null,
     name: '',
-    price: 100000,
+    price: 0,
     brandId: null,
     typeId: null,
     info: [{ title: '', description: '' }],
@@ -45,7 +45,7 @@ const DeviceForm: React.FC<DeviceFormProps> = ({ deviceId, setDeviceId }) => {
 
   const onChangeInput = (e: any) => setFormState({ ...formState, [e.target.name]: e.target.value });
   const onChangeFile = setFileToForm(setFormState, formState);
-  const createNewDevice = saveDevice(addDevice, setDeviceId);
+  const createNewDevice = saveDevice(addDevice, setDeviceId, setFormState);
 
   const form = (
     <motion.div

@@ -68,6 +68,10 @@
             word-wrap: break-word;
             word-break: break-all;
             margin-bottom: 0.5rem;
+            :nth-child(2) {
+              width: 20%;
+              text-align: end;
+            }
           }
           .addDeviceIcon {
             align-self: center;

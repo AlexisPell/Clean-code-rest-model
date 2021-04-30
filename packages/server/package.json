@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts",
     "start": "ts-node src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "pm2": "pm2 start processes.json --no-daemon"
   },
   "author": "",
   "license": "ISC",
@@ -35,6 +36,7 @@
     "lodash": "^4.17.21",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
+    "pm2": "^4.5.6",
     "sequelize": "^6.6.2",
     "uuid": "^8.3.2"
   }

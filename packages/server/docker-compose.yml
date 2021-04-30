@@ -1,0 +1,60 @@
+# sudo docker-compose run api yarn pm2 : It runs in production npm command pm2 with its own prod environment, using
+# composed postgress and api processes together.
+# sudo docker-compose up
+version: '3.7'
+services:
+  postgres:
+    image: postgres
+    container_name: my_database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pern_shop_ulbi
+    ports:
+      - '5432:5432'
+    volumes:
+      - api-db:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+    environment:
+      DB_URI: postgresql://postgres:postgres@localhost:5432/pern_shop_ulbi
+      DB_NAME: pern_shop_ulbi
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+    depends_on:
+      - postgres
+    ports:
+      - '4000:4000'
+    restart: on-failure
+
+volumes:
+  api-db:
+# version: '3'
+# services:
+#   app:
+#     build: .
+#     depends_on:
+#       - postgres
+#     environment:
+#       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/pern_shop_ulbi
+#       NODE_ENV: development
+#       PORT: 4000
+#     ports:
+#       - '4000:4000'
+#     command: yarn dev
+#     volumes:
+#       - .:/app/
+#       - /app/node_modules
+
+#   postgres:
+#     image: postgres:10.4
+#     ports:
+#       - '5432:5432'
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_DB: pern_shop_ulbi

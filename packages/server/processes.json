@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "name": "api",
+      "script": "./dist/index.js",
+      "merge_logs": true,
+      "max_restarts": 20,
+      "instances": 1,
+      "max_memory_restart": "200M",
+      "env": {
+        "PORT": 4000,
+        "NODE_ENV": "production",
+        "FRONTEND_URL": "http://localhost:3000",
+        "BACKEND_URL": "http://localhost:4000",
+        "DB_URI": "postgresql://postgres:postgres@localhost:5432/pern_shop_ulbi",
+        "DB_NAME": "pern_shop_ulbi",
+        "DB_USER": "postgres",
+        "DB_PASSWORD": "postgres",
+        "DB_HOST": "my_database",
+        "DB_PORT": "5432",
+        "SECRET_KEY": "my_randomer"
+      }
+    }
+  ]
+}

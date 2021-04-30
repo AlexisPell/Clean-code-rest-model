@@ -10,7 +10,7 @@ import { handlePagination, header, hideToLeft, showFromLeft, devicesList } from 
 interface ShopProps {}
 
 const Shop: React.FC<ShopProps> = observer(() => {
-  const { totalCountItems, pageLimit, page, setPage, brand, type } = handlePagination();
+  const { totalCountItems, pageLimit, page, setPage, brand, type, devices } = handlePagination();
 
   const listAnimations = useAnimation();
 
@@ -46,6 +46,9 @@ const Shop: React.FC<ShopProps> = observer(() => {
             onChange={(page) => setPage(page)}
             className={styles.pagination}
           />
+        )}
+        {devices.length > 0 && totalCountItems <= pageLimit && (
+          <h1 style={{ fontSize: '22px', textAlign: 'center' }}>All satisfying devices listed</h1>
         )}
       </motion.div>
       <AnimatePresence>

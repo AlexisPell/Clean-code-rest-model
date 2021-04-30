@@ -12,6 +12,8 @@
     overflow-y: auto;
     padding-bottom: 1rem;
     .list {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
       margin: 0.5rem;
       & > :nth-child(1) {
         background-color: #f2f3f5;
@@ -20,7 +22,7 @@
         overflow-y: hidden;
         margin-bottom: 0;
       }
-      .listHeader {
+      .listItemHeader {
         border-radius: 0.5rem;
       }
       background-color: #fff;
